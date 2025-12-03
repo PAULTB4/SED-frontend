@@ -277,10 +277,10 @@ npm run test:watch
 **Team Zentry**
 
 - **Tarazona Benancio Paul Marco** - Project Manager / Developer
-- **-** - Product Owner / Backend - Developer
-- **-** - Product Owner / Backend - Developer
-- **-** - Developer / Frontend - Developer
-- **-** - Developer / Documentation 
+- **-** - Backend / Developer
+- **-** - Backend / Developer
+- **-** - Frontend / Developer
+- **-** - Documentation / Design
 
 ---
 
