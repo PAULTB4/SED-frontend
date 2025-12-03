@@ -2,8 +2,6 @@
 
 <div align="center">
 
-![UNAS Logo](public/assets/logo.jpg)
-
 **Universidad Nacional Agraria de la Selva (UNAS)**  
 *Facultad de Ingeniería de Sistemas e Informática*
 
