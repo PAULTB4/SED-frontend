@@ -301,7 +301,7 @@ Este proyecto es parte del curso **Diseño Detallado de Software** de la **Unive
 
 ## 🙏 Agradecimientos
 
-- **Ing. Cristian García Villegas** - Docente del curso
+- **YANAC MONTESINO, RANNOVERNG** - Docente del curso
 - **Facultad de Ingeniería de Sistemas e Informática - UNAS**
 - **Comunidad de estudiantes y docentes de la UNAS**
 
