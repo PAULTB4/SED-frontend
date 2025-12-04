@@ -1,0 +1,228 @@
+.guide {
+  padding: var(--spacing-20) 0;
+  background-color: var(--color-bg-secondary);
+}
+
+.guide__header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto var(--spacing-16);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  align-items: center;
+}
+
+.guide__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-2) var(--spacing-4);
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+}
+
+.guide__badge svg {
+  width: 16px;
+  height: 16px;
+}
+
+.guide__title {
+  font-size: var(--font-size-3xl);
+  font-weight: 800;
+  color: var(--color-text-primary);
+}
+
+@media (min-width: 768px) {
+  .guide__title {
+    font-size: var(--font-size-4xl);
+  }
+}
+
+.guide__description {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+/* Content */
+.guide__content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-12);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@media (min-width: 1024px) {
+  .guide__content {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-16);
+  }
+}
+
+/* Steps */
+.guide__steps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+}
+
+.guide__steps-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  padding: var(--spacing-4);
+  background-color: white;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+}
+
+.guide__steps-header svg {
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+.guide__steps-header h3 {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.guide__steps-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.guide__step {
+  display: flex;
+  gap: var(--spacing-4);
+  padding: var(--spacing-5);
+  background-color: white;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-base);
+}
+
+.guide__step:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateX(8px);
+}
+
+.guide__step-number {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+  font-weight: 700;
+  font-size: var(--font-size-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.guide__step-content {
+  flex: 1;
+}
+
+.guide__step-title {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-2);
+}
+
+.guide__step-description {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+/* Callouts */
+.guide__callouts {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+}
+
+.guide__callout {
+  display: flex;
+  gap: var(--spacing-4);
+  align-items: flex-start;
+}
+
+.guide__callout--primary {
+  background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+  color: white;
+}
+
+.guide__callout--secondary {
+  background: linear-gradient(135deg, #FBBF24 0%, #F59E0B 100%);
+  color: var(--color-text-primary);
+}
+
+.guide__callout-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-full);
+  background-color: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.guide__callout--primary .guide__callout-icon {
+  color: white;
+}
+
+.guide__callout--secondary .guide__callout-icon {
+  color: var(--color-text-primary);
+}
+
+.guide__callout-content {
+  flex: 1;
+}
+
+.guide__callout-title {
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  margin-bottom: var(--spacing-2);
+}
+
+.guide__callout--primary .guide__callout-title {
+  color: white;
+}
+
+.guide__callout--secondary .guide__callout-title {
+  color: var(--color-text-primary);
+}
+
+.guide__callout-description {
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+}
+
+.guide__callout--primary .guide__callout-description {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.guide__callout--secondary .guide__callout-description {
+  color: var(--color-text-primary);
+}
+
+/* CTA */
+.guide__cta {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--spacing-12);
+}

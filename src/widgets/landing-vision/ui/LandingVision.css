@@ -1,0 +1,118 @@
+.vision {
+  padding: var(--spacing-20) 0;
+  background-color: var(--color-bg-primary);
+}
+
+.vision__header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto var(--spacing-12);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  align-items: center;
+}
+
+.vision__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-2) var(--spacing-4);
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+}
+
+.vision__badge svg {
+  width: 16px;
+  height: 16px;
+}
+
+.vision__title {
+  font-size: var(--font-size-3xl);
+  font-weight: 800;
+  color: var(--color-text-primary);
+}
+
+@media (min-width: 768px) {
+  .vision__title {
+    font-size: var(--font-size-4xl);
+  }
+}
+
+/* Grid */
+.vision__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-8);
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .vision__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Cards */
+.vision__card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  transition: transform var(--transition-base);
+}
+
+.vision__card:hover {
+  transform: translateY(-4px);
+}
+
+.vision__card--vision {
+  background: linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 100%);
+  border: 2px solid var(--color-primary);
+}
+
+.vision__card--mission {
+  background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
+  border: 2px solid var(--color-secondary);
+}
+
+.vision__card-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+}
+
+.vision__card-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.vision__card-icon--vision {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.vision__card-icon--mission {
+  background-color: var(--color-secondary);
+  color: white;
+}
+
+.vision__card-title {
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.vision__card-description {
+  font-size: var(--font-size-base);
+  color: var(--color-text-primary);
+  line-height: 1.7;
+}
