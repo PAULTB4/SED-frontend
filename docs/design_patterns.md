@@ -5,7 +5,7 @@
 **Proyecto:** SED - Sistema de Evaluación Docente  
 **Universidad:** Universidad Nacional Agraria de la Selva (UNAS)  
 **Curso:** Diseño Detallado de Software  
-**Equipo:** Team Inkietos  
+**Equipo:** Team Zentry
 **Fecha:** Abril 2025
 
 ---
@@ -87,21 +87,34 @@ export default ApiClient.getInstance();
 
 **Ejemplo:**
 ```javascript
-// entities/evaluacion/factory.js
-export class EvaluacionFactory {
+// entities/pregunta/factory.js
+
+import { PreguntaMultipleChoice } from "./PreguntaMultipleChoice.js";
+import { PreguntaEscalaLikert } from "./PreguntaEscalaLikert.js";
+import { PreguntaTextoAbierto } from "./PreguntaTextoAbierto.js";
+import { PreguntaSiNo } from "./PreguntaSiNo.js";
+
+export class PreguntaFactory {
   static crear(tipo, data) {
-    switch(tipo) {
-      case 'PARCIAL':
-        return new EvaluacionParcial(data);
-      case 'FINAL':
-        return new EvaluacionFinal(data);
-      case 'RECUPERACION':
-        return new EvaluacionRecuperacion(data);
+    switch (tipo) {
+      case "MULTIPLE_CHOICE":
+        return new PreguntaMultipleChoice(data);
+
+      case "ESCALA_LIKERT":
+        return new PreguntaEscalaLikert(data);
+
+      case "TEXTO_ABIERTO":
+        return new PreguntaTextoAbierto(data);
+
+      case "SI_NO":
+        return new PreguntaSiNo(data);
+
       default:
-        throw new Error(`Tipo no válido: ${tipo}`);
+        throw new Error(`Tipo de pregunta no válido: ${tipo}`);
     }
   }
 }
+
 ```
 
 ---
@@ -405,6 +418,6 @@ Los patrones de diseño implementados en SED no son solo "buenas prácticas teó
 ---
 
 **Versión:** 1.0  
-**Equipo:** Team Inkietos  
+**Equipo:** Team zentry
 **Universidad:** UNAS - Tingo María  
-**Fecha:** Abril 2025
+**Fecha:** diciembre 2025
