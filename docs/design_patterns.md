@@ -5,7 +5,7 @@
 **Proyecto:** SED - Sistema de Evaluación Docente  
 **Universidad:** Universidad Nacional Agraria de la Selva (UNAS)  
 **Curso:** Diseño Detallado de Software  
-**Equipo:** Team Inkietos  
+**Equipo:** Team Zentry
 **Fecha:** Abril 2025
 
 ---
@@ -405,6 +405,6 @@ Los patrones de diseño implementados en SED no son solo "buenas prácticas teó
 ---
 
 **Versión:** 1.0  
-**Equipo:** Team Inkietos  
+**Equipo:** Team zentry
 **Universidad:** UNAS - Tingo María  
-**Fecha:** Abril 2025
+**Fecha:** diciembre 2025
