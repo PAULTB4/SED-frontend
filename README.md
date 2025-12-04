@@ -2,8 +2,6 @@
 
 <div align="center">
 
-![UNAS Logo](public/assets/logo-unas.png)
-
 **Universidad Nacional Agraria de la Selva (UNAS)**  
 *Facultad de Ingeniería de Sistemas e Informática*
 
@@ -276,12 +274,13 @@ npm run test:watch
 
 ## 👨‍💻 Equipo de Desarrollo
 
-**Team Inkietos**
+**Team Zentry**
 
-- **Brennis Benjaminn Castro Cano** - Scrum Master / Developer
-- **Paul Tarazona Benancio** - Product Owner / Developer
-- **Dairon Said Hidalgo Robles** - Developer
-- **Anayely Xiomy Masgo Villanueva** - Developer
+- **Tarazona Benancio Paul Marco** - Project Manager / Developer
+- **-** - Backend / Developer
+- **-** - Backend / Developer
+- **-** - Frontend / Developer
+- **-** - Documentation / Design
 
 ---
 
@@ -310,7 +309,7 @@ Este proyecto es parte del curso **Diseño Detallado de Software** de la **Unive
 
 <div align="center">
 
-**Hecho con ❤️ por Team Inkietos**
+**Hecho con ❤️ por Zentry Corp**
 
 *Universidad Nacional Agraria de la Selva - 2025*
 
