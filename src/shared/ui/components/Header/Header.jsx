@@ -75,8 +75,7 @@ export const Header = () => {
   >
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
       <path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4M10 17l5-5-5-5M15 12H3" stroke="currentColor" strokeWidth="2"/>
-    </svg>
-    Iniciar sesión
+    </svg>Iniciar sesión
   </Button>
 </Link>
           </div>
@@ -116,8 +115,7 @@ export const Header = () => {
                 variant="primary" 
                 size="md"
                 fullWidth
-                onClick={() => window.location.href = '/login'}
-              >
+                onClick={() => window.location.href = '/login'}>
                 Iniciar sesión
               </Button>
             </li>
