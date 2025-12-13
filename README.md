@@ -75,7 +75,9 @@ El proyecto utiliza **Feature-Sliced Design (FSD)**, una arquitectura moderna qu
 - ✅ **Observer** - Notificaciones globales (Redux)
 - ✅ **Decorator (HOC)** - Protección de rutas
 
-📖 Ver documentación completa en [`/docs/design_patterns.md`](docs/design_patterns.md)
+📖 Ver documentación completa:
+- [Patrones de Diseño](docs/design_patterns.md)
+- [**Diseño Detallado de Software**](docs/DISEÑO_DETALLADO.md) ⭐ NUEVO v1
 
 ---
 
@@ -146,29 +148,55 @@ git clone https://github.com/team-inkietos/sed-frontend.git
 cd sed-frontend
 ```
 
-2. **Instalar dependencias**
+2. **Cambiar a la rama de desarrollo**
+```bash
+git checkout v1
+```
+
+3. **Instalar dependencias**
 ```bash
 npm install
 ```
 
-3. **Configurar variables de entorno**
+4. **Configurar variables de entorno**
 ```bash
 cp .env.example .env.local
 ```
 
 Editar `.env.local`:
 ```env
-REACT_APP_API_URL=https://api-sed.unas.edu.pe/v1
-REACT_APP_API_TIMEOUT=10000
-REACT_APP_TOKEN_KEY=sed_token
+VITE_API_URL=http://localhost:8080/api
+VITE_API_TIMEOUT=10000
 ```
 
-4. **Ejecutar en desarrollo**
+5. **Ejecutar en desarrollo**
 ```bash
 npm run dev
 ```
 
 La aplicación estará disponible en: `http://localhost:5173`
+
+### 🎯 URLs de Acceso a las Vistas Desarrolladas
+
+#### 📘 Módulo Docente (Completado)
+- **Dashboard**: `http://localhost:5173/docente/dashboard`
+- **Mi Perfil**: `http://localhost:5173/docente/perfil`
+- **Mis Evaluaciones**: `http://localhost:5173/docente/evaluaciones`
+- **Recomendaciones**: `http://localhost:5173/docente/recomendaciones`
+
+#### 📊 Módulo Comisión (Completado)
+- **Dashboard**: `http://localhost:5173/comision/dashboard`
+- **Mi Perfil**: `http://localhost:5173/comision/perfil`
+- **Períodos**: `http://localhost:5173/comision/periodos`
+- **Reportes**: `http://localhost:5173/comision/reportes`
+
+#### 🎓 Módulo Estudiante (Pendiente)
+- Será desarrollado por el equipo backend
+
+#### 📝 Módulo Evaluación (Pendiente)
+- Será desarrollado por el equipo backend
+
+> **Nota**: Actualmente todas las vistas funcionan con datos mock. Ver sección de **Integración con Backend** para más detalles.
 
 ---
 
@@ -208,33 +236,203 @@ La aplicación estará disponible en: `http://localhost:5173`
 
 ## 📊 Funcionalidades Principales
 
-### Módulo de Estudiantes
-- [x] Calificar docentes con estrellas (1-5)
-- [x] Dejar comentarios anónimos
-- [x] Ver historial de evaluaciones propias
-- [x] Consultar evaluaciones de otros
-- [x] Filtrar por facultad, escuela, curso
-- [x] Guardar evaluación como borrador
+### ✅ Módulo de Docentes (Completado - v1)
+- [x] **Dashboard**: Estadísticas generales, lista de cursos
+- [x] **Mi Perfil**: Información personal, datos académicos, estadísticas de gestión
+- [x] **Mis Evaluaciones**: Gráficos de evolución, tabla detallada de evaluaciones por curso
+- [x] **Recomendaciones**: Sistema de sugerencias priorizadas por categoría
+- [x] **Modo Oscuro**: Toggle persistente en todas las vistas
+- [x] **Componentes reutilizables**: StatCard, CourseCard, BarChart, LineChart, StarRating
 
-### Módulo de Docentes
-- [x] Ver estadísticas agregadas
-- [x] Gráficos de desempeño por criterio
-- [x] Comparar resultados entre semestres
-- [x] Exportar reportes en PDF/Excel
+**Archivos importantes:**
+- `src/pages/docente/` - Todas las páginas del módulo
+- `src/features/evaluaciones-docente/hooks/useDocenteData.js` - Hook con datos mock
+- `src/shared/ui/layouts/DocenteLayout/` - Layout con navbar y navegación
 
-### Módulo de Comisión
-- [x] Revisar evaluaciones pendientes
-- [x] Aprobar/rechazar evaluaciones
-- [x] Generar reportes institucionales
-- [x] Definir periodos de evaluación
+### ✅ Módulo de Comisión (Completado - v1)
+- [x] **Dashboard**: Banner informativo, funciones principales, estadísticas generales, accesos rápidos, períodos activos
+- [x] **Mi Perfil**: Avatar, información de contacto (6 items), responsabilidades del cargo, estadísticas de gestión
+- [x] **Períodos**: Tabs (Activos/Programados/Finalizados), tarjetas con progreso, botón crear período
+- [x] **Reportes**: Selector de período, botones exportar PDF/Excel, 3 stat cards, 4 gráficos (barras, pie, línea), tabla de reportes recientes
+- [x] **Modo Oscuro**: Toggle persistente en todas las vistas
+- [x] **Componentes reutilizables**: PieChart (nuevo), aprovecha StatCard, BarChart, LineChart
 
-### Módulo de Administración
-- [x] Gestión de usuarios (CRUD)
-- [x] Configurar criterios de evaluación
-- [x] Administrar cursos y docentes
-- [x] Dashboard con estadísticas globales
+**Archivos importantes:**
+- `src/pages/comision/` - Todas las páginas del módulo
+- `src/features/evaluacion-comision/hooks/useComisionData.js` - Hook con datos mock
+- `src/shared/ui/layouts/ComisionLayout/` - Layout con navbar y navegación
+- `src/shared/ui/components/PieChart/` - Nuevo componente para gráficos circulares
+
+### ⏳ Módulo de Estudiantes (Pendiente)
+- [ ] Calificar docentes con estrellas (1-5)
+- [ ] Dejar comentarios anónimos
+- [ ] Ver historial de evaluaciones propias
+- [ ] Consultar evaluaciones de otros
+- [ ] Filtrar por facultad, escuela, curso
+- [ ] Guardar evaluación como borrador
+
+### ⏳ Módulo de Evaluación (Pendiente)
+- [ ] Sistema de evaluación anónima
+- [ ] Formulario dinámico de evaluación
+- [ ] Validación y guardado de respuestas
+- [ ] Vista previa antes de enviar
 
 ---
+
+## 🔌 Integración con Backend (Java Spring Boot)
+
+### 📋 Datos Mock vs API Real
+
+**Estado Actual (v1):**
+Todos los módulos funcionan con datos mock almacenados en custom hooks. Esto permite desarrollar el frontend de manera independiente mientras el backend está en desarrollo.
+
+### 🎯 Archivos Mock a Reemplazar
+
+#### Para Módulo Docente:
+**Archivo**: `src/features/evaluaciones-docente/hooks/useDocenteData.js`
+
+```javascript
+// ❌ MOCK ACTUAL (Temporal)
+export const useDocenteData = () => {
+  const [data, setData] = useState(null);
+  // ... datos hardcodeados
+  return { data, loading, error };
+};
+
+// ✅ IMPLEMENTACIÓN CON API (Futuro)
+export const useDocenteData = () => {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await apiClient.get('/docentes/me');
+        setData(response.data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+
+  return { data, loading, error };
+};
+```
+
+#### Para Módulo Comisión:
+**Archivo**: `src/features/evaluacion-comision/hooks/useComisionData.js`
+
+Similar estructura, reemplazar datos mock con llamadas a:
+- `GET /comision/estadisticas` - Estadísticas generales
+- `GET /comision/periodos` - Lista de períodos
+- `GET /comision/reportes` - Reportes y gráficos
+
+### 🔧 Cliente HTTP Configurado
+
+El proyecto ya tiene un cliente HTTP base en:
+**Archivo**: `src/shared/api/apiClient.js`
+
+```javascript
+import axios from 'axios';
+
+const apiClient = axios.create({
+  baseURL: import.meta.env.VITE_API_URL,
+  timeout: import.meta.env.VITE_API_TIMEOUT,
+});
+
+// Interceptor para agregar token JWT
+apiClient.interceptors.request.use((config) => {
+  const token = localStorage.getItem('token');
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
+export { apiClient };
+```
+
+### 📡 Endpoints Esperados del Backend
+
+#### Autenticación
+```
+POST /api/auth/login
+POST /api/auth/logout
+POST /api/auth/refresh-token
+```
+
+#### Docentes
+```
+GET  /api/docentes/me                    - Información del docente autenticado
+GET  /api/docentes/me/estadisticas       - Estadísticas generales
+GET  /api/docentes/me/cursos             - Lista de cursos
+GET  /api/docentes/me/evaluaciones       - Evaluaciones recibidas
+GET  /api/docentes/me/recomendaciones    - Recomendaciones generadas
+```
+
+#### Comisión
+```
+GET  /api/comision/estadisticas          - Estadísticas globales
+GET  /api/comision/periodos              - Lista de períodos de evaluación
+POST /api/comision/periodos              - Crear nuevo período
+GET  /api/comision/reportes              - Datos para reportes y gráficos
+GET  /api/comision/reportes/export/pdf   - Exportar reporte en PDF
+GET  /api/comision/reportes/export/excel - Exportar reporte en Excel
+```
+
+### 🔐 Formato de Respuestas Esperado
+
+```json
+{
+  "success": true,
+  "data": {
+    // ... datos solicitados
+  },
+  "message": "Operación exitosa",
+  "timestamp": "2025-12-13T10:30:00Z"
+}
+```
+
+### ⚠️ Manejo de Errores
+
+```json
+{
+  "success": false,
+  "error": {
+    "code": "ERR_UNAUTHORIZED",
+    "message": "Token inválido o expirado"
+  },
+  "timestamp": "2025-12-13T10:30:00Z"
+}
+```
+
+### 📝 Consideraciones para Integración
+
+1. **Autenticación JWT**: El token debe almacenarse en `localStorage` con key `'token'`
+2. **CORS**: El backend debe permitir peticiones desde `http://localhost:5173` en desarrollo
+3. **Formato de Fechas**: Usar formato ISO 8601 (`YYYY-MM-DDTHH:mm:ssZ`)
+4. **Paginación**: Implementar para listas grandes (cursos, evaluaciones, etc.)
+5. **Validación**: El frontend ya valida datos, pero el backend debe revalidar por seguridad
+
+### 🚀 Pasos para Migrar de Mock a API
+
+1. Configurar `VITE_API_URL` en `.env.local` apuntando al backend
+2. Reemplazar contenido de hooks `useDocenteData` y `useComisionData`
+3. Agregar manejo de estados de carga y error en componentes
+4. Implementar refresh de datos cuando sea necesario
+5. Probar con diferentes escenarios (éxito, error, timeout)
+
+### 📦 Estructura de Datos Mock (Referencia para Backend)
+
+Los datos mock actuales sirven como **contrato de interfaz** entre frontend y backend. El backend debe retornar estructuras similares para mantener compatibilidad.
+
+Ver archivos mock completos en:
+- `src/features/evaluaciones-docente/hooks/useDocenteData.js`
+- `src/features/evaluacion-comision/hooks/useComisionData.js`
 
 ## 🧪 Testing
 ```bash

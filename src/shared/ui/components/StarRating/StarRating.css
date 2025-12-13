@@ -1,0 +1,40 @@
+.star-rating {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.star-rating__stars {
+  display: flex;
+  gap: 0.125rem;
+}
+
+.star-rating__star {
+  color: #FCD34D;
+  transition: transform 0.2s ease;
+}
+
+.star-rating__star--sm {
+  width: 14px;
+  height: 14px;
+}
+
+.star-rating__star--md {
+  width: 18px;
+  height: 18px;
+}
+
+.star-rating__star--lg {
+  width: 24px;
+  height: 24px;
+}
+
+.star-rating__star--filled {
+  color: #FCD34D;
+}
+
+.star-rating__value {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+}

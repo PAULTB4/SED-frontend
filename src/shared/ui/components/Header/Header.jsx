@@ -12,7 +12,6 @@ export const Header = () => {
 
   return (
     <header className="header">
-      <div className="container">
         <nav className="header__nav">
           {/* Logo */}
           <Link to="/" className="header__logo">
@@ -69,15 +68,18 @@ export const Header = () => {
           {/* Botón Iniciar Sesión */}
           <div className="header__actions">
             <Link to="/login">
-  <Button 
-    variant="primary" 
-    size="md"
-  >
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-      <path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4M10 17l5-5-5-5M15 12H3" stroke="currentColor" strokeWidth="2"/>
-    </svg>Iniciar sesión
-  </Button>
-</Link>
+              <Button 
+                variant="primary" 
+                size="sm"
+                leftIcon={
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                    <path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4M10 17l5-5-5-5M15 12H3" stroke="currentColor" strokeWidth="2"/>
+                  </svg>
+                }
+              >
+                Iniciar sesión
+              </Button>
+            </Link>
           </div>
 
           {/* Botón hamburguesa móvil */}
@@ -121,7 +123,6 @@ export const Header = () => {
             </li>
           </ul>
         </div>
-      </div>
     </header>
   );
 };

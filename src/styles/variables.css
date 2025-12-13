@@ -72,3 +72,36 @@
   /* Contenedor máximo */
   --container-max-width: 1280px;
 }
+
+/* Modo Oscuro */
+.dark-mode {
+  /* Colores principales en modo oscuro */
+  --color-primary: #10b981;
+  --color-primary-dark: #059669;
+  --color-primary-light: #065f46;
+  
+  /* Colores de texto en modo oscuro */
+  --color-text-primary: #f9fafb;
+  --color-text-secondary: #d1d5db;
+  --color-text-light: #9ca3af;
+  
+  /* Colores de fondo en modo oscuro */
+  --color-bg-primary: #1f2937;
+  --color-bg-secondary: #111827;
+  --color-bg-dark: #030712;
+  
+  /* Colores de borde en modo oscuro */
+  --color-border: #374151;
+  
+  /* Sombras en modo oscuro */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+}
+
+/* Transición suave para el cambio de modo */
+* {
+  transition: background-color 200ms ease-in-out, 
+              border-color 200ms ease-in-out,
+              color 200ms ease-in-out;
+}

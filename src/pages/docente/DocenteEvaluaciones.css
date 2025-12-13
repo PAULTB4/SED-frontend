@@ -1,0 +1,194 @@
+.docente-evaluaciones {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Header */
+.docente-evaluaciones__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.docente-evaluaciones__title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+}
+
+.docente-evaluaciones__select {
+  padding: 0.625rem 1rem;
+  background: white;
+  border: 1px solid #D1D5DB;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 300px;
+}
+
+.docente-evaluaciones__select:hover {
+  border-color: #10B981;
+}
+
+.docente-evaluaciones__select:focus {
+  outline: none;
+  border-color: #10B981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+/* Charts Grid */
+.docente-evaluaciones__charts {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.docente-evaluaciones__chart-card {
+  background: var(--color-bg-primary);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.docente-evaluaciones__chart-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0 0 1.5rem 0;
+}
+
+/* Table */
+.docente-evaluaciones__table-card {
+  background: var(--color-bg-primary);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.docente-evaluaciones__table-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0 0 1.5rem 0;
+}
+
+.docente-evaluaciones__table-container {
+  overflow-x: auto;
+}
+
+.docente-evaluaciones__table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.docente-evaluaciones__table thead {
+  background: #F9FAFB;
+}
+
+.docente-evaluaciones__table th {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #6B7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid #E5E7EB;
+}
+
+.docente-evaluaciones__table td {
+  padding: 1rem;
+  font-size: 0.875rem;
+  color: #374151;
+  border-bottom: 1px solid #F3F4F6;
+}
+
+.docente-evaluaciones__table tbody tr:hover {
+  background: #F9FAFB;
+}
+
+.docente-evaluaciones__table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Loading */
+.docente-evaluaciones__loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  gap: 1rem;
+}
+
+.docente-evaluaciones__spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid #E5E7EB;
+  border-top-color: #10B981;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .docente-evaluaciones__charts {
+    grid-template-columns: 1fr;
+  }
+  
+  .docente-evaluaciones__header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .docente-evaluaciones__select {
+    width: 100%;
+  }
+}
+
+/* Modo Oscuro */
+.dark-mode .docente-evaluaciones__title {
+  color: var(--color-text-primary);
+}
+
+.dark-mode .docente-evaluaciones__select {
+  background: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+  border-color: var(--color-border);
+}
+
+.dark-mode .docente-evaluaciones__chart-title {
+  color: var(--color-text-primary);
+}
+
+.dark-mode .docente-evaluaciones__table-title {
+  color: var(--color-text-primary);
+}
+
+.dark-mode .docente-evaluaciones__table {
+  background: var(--color-bg-primary);
+}
+
+.dark-mode .docente-evaluaciones__table th {
+  background: var(--color-bg-secondary);
+  color: var(--color-text-secondary);
+  border-bottom-color: var(--color-border);
+}
+
+.dark-mode .docente-evaluaciones__table td {
+  color: var(--color-text-secondary);
+  border-bottom-color: var(--color-border);
+}
+
+.dark-mode .docente-evaluaciones__table tbody tr:hover {
+  background: var(--color-bg-secondary);
+}

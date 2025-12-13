@@ -1,0 +1,339 @@
+.docente-layout {
+  min-height: 100vh;
+  background: var(--color-bg-secondary);
+}
+
+/* Navbar */
+.docente-layout__navbar {
+  background: var(--color-bg-primary);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.docente-layout__navbar-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+
+/* Logo */
+.docente-layout__logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.docente-layout__logo:hover {
+  color: #10B981;
+}
+
+.docente-layout__logo-icon {
+  color: #10B981;
+}
+
+.docente-layout__logo-text {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+/* Navigation Links */
+.docente-layout__nav-links {
+  display: flex;
+  gap: 0.5rem;
+  flex: 1;
+  justify-content: center;
+}
+
+.docente-layout__nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1rem;
+  color: #6B7280;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.docente-layout__nav-link:hover {
+  background: #D1FAE5;
+  color: #10B981;
+}
+
+.docente-layout__nav-link--active {
+  background: #D1FAE5;
+  color: #10B981;
+}
+
+.docente-layout__nav-link--active:hover {
+  background: #A7F3D0;
+}
+
+/* Right Section */
+.docente-layout__navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.docente-layout__icon-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: none;
+  color: #6B7280;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.docente-layout__icon-button:hover {
+  background: #D1FAE5;
+  color: #10B981;
+}
+
+/* Notification Button */
+.docente-layout__notification-button {
+  position: relative;
+}
+
+.docente-layout__notification-badge {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 18px;
+  height: 18px;
+  background: #EF4444;
+  color: white;
+  font-size: 0.625rem;
+  font-weight: 600;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* User Dropdown */
+.docente-layout__user-dropdown {
+  position: relative;
+}
+
+.docente-layout__user-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background: transparent;
+  border: none;
+  color: #111827;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.docente-layout__user-button:hover {
+  background: #F3F4F6;
+}
+
+.docente-layout__user-name {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #111827;
+}
+
+.docente-layout__dropdown-menu {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  width: 240px;
+  background: white;
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  animation: dropdownSlide 0.2s ease;
+}
+
+@keyframes dropdownSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.docente-layout__dropdown-header {
+  padding: 1rem;
+  background: #F9FAFB;
+}
+
+.docente-layout__dropdown-user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.docente-layout__dropdown-name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+}
+
+.docente-layout__dropdown-role {
+  font-size: 0.75rem;
+  color: #6B7280;
+  margin: 0;
+}
+
+.docente-layout__dropdown-divider {
+  height: 1px;
+  background: #E5E7EB;
+}
+
+.docente-layout__dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: transparent;
+  border: none;
+  color: #374151;
+  font-size: 0.875rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  text-align: left;
+}
+
+.docente-layout__dropdown-item:hover {
+  background: #F9FAFB;
+}
+
+.docente-layout__dropdown-item--danger {
+  color: #EF4444;
+}
+
+.docente-layout__dropdown-item--danger:hover {
+  background: #FEF2F2;
+}
+
+/* Main Content */
+.docente-layout__content {
+  padding: 2rem 0;
+}
+
+.docente-layout__container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Modo Oscuro */
+.dark-mode .docente-layout {
+  background: #111827;
+}
+
+.dark-mode .docente-layout__navbar {
+  background: #1f2937;
+  border-bottom-color: #374151;
+}
+
+.dark-mode .docente-layout__logo-text {
+  color: #f9fafb;
+}
+
+.dark-mode .docente-layout__nav-link {
+  color: #d1d5db;
+}
+
+.dark-mode .docente-layout__nav-link:hover {
+  background: #065f46;
+  color: #10B981;
+}
+
+.dark-mode .docente-layout__nav-link--active {
+  background: #065f46;
+  color: #10B981;
+}
+
+.dark-mode .docente-layout__icon-button {
+  color: #d1d5db;
+}
+
+.dark-mode .docente-layout__icon-button:hover {
+  background: #374151;
+  color: #10B981;
+}
+
+.dark-mode .docente-layout__user-button {
+  color: #f9fafb;
+}
+
+.dark-mode .docente-layout__user-button:hover {
+  background: #374151;
+}
+
+.dark-mode .docente-layout__user-name {
+  color: #f9fafb;
+}
+
+.dark-mode .docente-layout__dropdown-menu {
+  background: #1f2937;
+  border-color: #374151;
+}
+
+.dark-mode .docente-layout__dropdown-header {
+  background: #111827;
+}
+
+.dark-mode .docente-layout__dropdown-name {
+  color: #f9fafb;
+}
+
+.dark-mode .docente-layout__dropdown-role {
+  color: #9ca3af;
+}
+
+.dark-mode .docente-layout__dropdown-divider {
+  background: #374151;
+}
+
+.dark-mode .docente-layout__dropdown-item {
+  color: #d1d5db;
+}
+
+.dark-mode .docente-layout__dropdown-item:hover {
+  background: #374151;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .docente-layout__nav-links {
+    display: none;
+  }
+  
+  .docente-layout__user-name {
+    display: none;
+  }
+}

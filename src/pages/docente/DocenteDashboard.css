@@ -1,0 +1,132 @@
+.docente-dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Header */
+.docente-dashboard__header {
+  background: var(--color-bg-primary);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.docente-dashboard__welcome {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.docente-dashboard__welcome-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.docente-dashboard__title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+}
+
+.docente-dashboard__subtitle {
+  font-size: 1rem;
+  color: #6B7280;
+  margin: 0;
+}
+
+/* Stats Grid */
+.docente-dashboard__stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Section */
+.docente-dashboard__section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.docente-dashboard__section-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+}
+
+/* Courses Grid */
+.docente-dashboard__courses {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Loading State */
+.docente-dashboard__loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  gap: 1rem;
+}
+
+.docente-dashboard__spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid #E5E7EB;
+  border-top-color: #10B981;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.docente-dashboard__loading p {
+  color: #6B7280;
+  font-size: 0.875rem;
+}
+
+/* Error State */
+.docente-dashboard__error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  color: #EF4444;
+  font-size: 0.875rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .docente-dashboard__header {
+    padding: 1.5rem;
+  }
+
+  .docente-dashboard__title {
+    font-size: 1.5rem;
+  }
+
+  .docente-dashboard__stats {
+    grid-template-columns: 1fr;
+  }
+
+  .docente-dashboard__courses {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Modo Oscuro */
+.dark-mode .docente-dashboard__title,
+.dark-mode .docente-dashboard__subtitle,
+.dark-mode .docente-dashboard__section-title {
+  color: var(--color-text-primary);
+}
