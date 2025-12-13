@@ -1,0 +1,205 @@
+.estudiante-perfil {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.estudiante-perfil__page-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+}
+
+.estudiante-perfil__grid {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  gap: 2rem;
+}
+
+.estudiante-perfil__card {
+  background: var(--color-bg-primary);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Avatar Section */
+.estudiante-perfil__avatar-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #E5E7EB;
+  margin-bottom: 1.5rem;
+}
+
+.estudiante-perfil__name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+  text-align: center;
+}
+
+/* Info Items */
+.estudiante-perfil__info {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.estudiante-perfil__info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.estudiante-perfil__info-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #6B7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.estudiante-perfil__info-value {
+  font-size: 0.875rem;
+  color: #111827;
+}
+
+/* Courses Section */
+.estudiante-perfil__section-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0 0 1.5rem 0;
+}
+
+.estudiante-perfil__courses-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.estudiante-perfil__course-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: #F9FAFB;
+  border-radius: 8px;
+  border-left: 3px solid #10B981;
+  transition: all 0.3s ease;
+}
+
+.estudiante-perfil__course-item:hover {
+  transform: translateX(4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.estudiante-perfil__course-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.estudiante-perfil__course-code {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: white;
+  background: #10B981;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+
+.estudiante-perfil__course-name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.estudiante-perfil__course-teacher {
+  font-size: 0.75rem;
+  color: #6B7280;
+  padding-left: 0.5rem;
+}
+
+/* Loading & Error */
+.estudiante-perfil__loading,
+.estudiante-perfil__error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  gap: 1rem;
+}
+
+.estudiante-perfil__spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid #E5E7EB;
+  border-top-color: #10B981;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Modo Oscuro */
+.dark-mode .estudiante-perfil__page-title {
+  color: var(--color-text-primary);
+}
+
+.dark-mode .estudiante-perfil__avatar-section {
+  border-bottom-color: var(--color-border);
+}
+
+.dark-mode .estudiante-perfil__name {
+  color: var(--color-text-primary);
+}
+
+.dark-mode .estudiante-perfil__info-label {
+  color: var(--color-text-secondary);
+}
+
+.dark-mode .estudiante-perfil__info-value {
+  color: var(--color-text-primary);
+}
+
+.dark-mode .estudiante-perfil__section-title {
+  color: var(--color-text-primary);
+}
+
+.dark-mode .estudiante-perfil__course-item {
+  background: var(--color-bg-secondary);
+}
+
+.dark-mode .estudiante-perfil__course-name {
+  color: var(--color-text-primary);
+}
+
+.dark-mode .estudiante-perfil__course-teacher {
+  color: var(--color-text-secondary);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .estudiante-perfil__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .estudiante-perfil__page-title {
+    font-size: 1.5rem;
+  }
+
+  .estudiante-perfil__card {
+    padding: 1.5rem;
+  }
+}

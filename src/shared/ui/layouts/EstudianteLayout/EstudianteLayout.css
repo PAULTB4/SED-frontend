@@ -1,0 +1,294 @@
+.estudiante-layout {
+  min-height: 100vh;
+  background: #F9FAFB;
+}
+
+/* Navbar */
+.estudiante-layout__navbar {
+  background: #2D3748;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.estudiante-layout__navbar-container {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+
+/* Logo */
+.estudiante-layout__logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: white;
+  transition: opacity 0.2s;
+}
+
+.estudiante-layout__logo:hover {
+  opacity: 0.8;
+}
+
+.estudiante-layout__logo-icon {
+  color: #10B981;
+}
+
+.estudiante-layout__logo-text {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: white;
+}
+
+/* Nav Links */
+.estudiante-layout__nav-links {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.estudiante-layout__nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.estudiante-layout__nav-link:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.estudiante-layout__nav-link--active {
+  background: #10B981;
+  color: white;
+}
+
+.estudiante-layout__nav-link svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Right Section */
+.estudiante-layout__navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.estudiante-layout__icon-button {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.estudiante-layout__icon-button:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+}
+
+.estudiante-layout__notification-button {
+  position: relative;
+}
+
+.estudiante-layout__notification-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: #EF4444;
+  color: white;
+  font-size: 0.625rem;
+  font-weight: 700;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* User Dropdown */
+.estudiante-layout__user-dropdown {
+  position: relative;
+}
+
+.estudiante-layout__user-button {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.estudiante-layout__user-button:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.estudiante-layout__user-name {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.estudiante-layout__dropdown-menu {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  min-width: 220px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  padding: 0.5rem;
+  z-index: 1000;
+}
+
+.estudiante-layout__dropdown-header {
+  padding: 0.75rem;
+}
+
+.estudiante-layout__dropdown-user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.estudiante-layout__dropdown-name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+}
+
+.estudiante-layout__dropdown-role {
+  font-size: 0.75rem;
+  color: #6B7280;
+  margin: 0;
+}
+
+.estudiante-layout__dropdown-divider {
+  height: 1px;
+  background: #E5E7EB;
+  margin: 0.5rem 0;
+}
+
+.estudiante-layout__dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.625rem 0.75rem;
+  color: #374151;
+  text-decoration: none;
+  font-size: 0.875rem;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.estudiante-layout__dropdown-item:hover {
+  background: #F3F4F6;
+}
+
+.estudiante-layout__dropdown-item--danger {
+  color: #EF4444;
+}
+
+.estudiante-layout__dropdown-item--danger:hover {
+  background: #FEE2E2;
+}
+
+/* Main Content */
+.estudiante-layout__content {
+  padding: 2rem 0;
+}
+
+.estudiante-layout__container {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Dark Mode */
+.dark-mode .estudiante-layout {
+  background: #111827;
+}
+
+.dark-mode .estudiante-layout__dropdown-menu {
+  background: #1F2937;
+}
+
+.dark-mode .estudiante-layout__dropdown-name {
+  color: #F9FAFB;
+}
+
+.dark-mode .estudiante-layout__dropdown-role {
+  color: #9CA3AF;
+}
+
+.dark-mode .estudiante-layout__dropdown-divider {
+  background: #374151;
+}
+
+.dark-mode .estudiante-layout__dropdown-item {
+  color: #D1D5DB;
+}
+
+.dark-mode .estudiante-layout__dropdown-item:hover {
+  background: #374151;
+}
+
+.dark-mode .estudiante-layout__dropdown-item--danger:hover {
+  background: #7F1D1D;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .estudiante-layout__nav-links {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .estudiante-layout__navbar-container {
+    padding: 0 1rem;
+  }
+
+  .estudiante-layout__container {
+    padding: 0 1rem;
+  }
+
+  .estudiante-layout__user-name {
+    display: none;
+  }
+
+  .estudiante-layout__logo-text {
+    display: none;
+  }
+}

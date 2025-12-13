@@ -1,0 +1,307 @@
+.estudiante-evaluar {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Breadcrumb */
+.estudiante-evaluar__breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: #6B7280;
+}
+
+.estudiante-evaluar__breadcrumb a {
+  color: #10B981;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.estudiante-evaluar__breadcrumb a:hover {
+  color: #059669;
+}
+
+/* Header */
+.estudiante-evaluar__header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  background: var(--color-bg-primary);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.estudiante-evaluar__header-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.estudiante-evaluar__title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+}
+
+.estudiante-evaluar__subtitle {
+  font-size: 0.875rem;
+  color: #6B7280;
+  margin: 0;
+}
+
+/* Form Container */
+.estudiante-evaluar__form-container {
+  background: var(--color-bg-primary);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.estudiante-evaluar__form-header {
+  margin-bottom: 2rem;
+}
+
+.estudiante-evaluar__form-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0 0 0.5rem;
+}
+
+.estudiante-evaluar__form-description {
+  font-size: 0.875rem;
+  color: #6B7280;
+  margin: 0;
+}
+
+/* Section */
+.estudiante-evaluar__section {
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+
+.estudiante-evaluar__section-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem;
+  background: #F9FAFB;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.estudiante-evaluar__section-header:hover {
+  background: #F3F4F6;
+}
+
+.estudiante-evaluar__section-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+  text-align: left;
+}
+
+.estudiante-evaluar__section-header svg {
+  transition: transform 0.3s ease;
+  color: #6B7280;
+}
+
+.estudiante-evaluar__section-content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Rating Item */
+.estudiante-evaluar__rating-item {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.estudiante-evaluar__rating-label {
+  font-size: 0.875rem;
+  color: #374151;
+  margin: 0;
+  font-weight: 500;
+}
+
+.estudiante-evaluar__rating-scale {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.estudiante-evaluar__rating-button {
+  width: 48px;
+  height: 48px;
+  border: 2px solid #D1D5DB;
+  border-radius: 8px;
+  background: white;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #6B7280;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.estudiante-evaluar__rating-button:hover {
+  border-color: #10B981;
+  background: rgba(16, 185, 129, 0.1);
+  color: #10B981;
+}
+
+.estudiante-evaluar__rating-button--active {
+  border-color: #10B981;
+  background: #10B981;
+  color: white;
+}
+
+.estudiante-evaluar__rating-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: #9CA3AF;
+}
+
+/* Comments Section */
+.estudiante-evaluar__comments-section {
+  margin-top: 1rem;
+  padding: 1.5rem;
+  background: #F9FAFB;
+  border-radius: 8px;
+}
+
+.estudiante-evaluar__textarea {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid #D1D5DB;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-family: inherit;
+  resize: vertical;
+  margin-top: 1rem;
+  transition: border-color 0.2s;
+}
+
+.estudiante-evaluar__textarea:focus {
+  outline: none;
+  border-color: #10B981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+/* Actions */
+.estudiante-evaluar__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #E5E7EB;
+}
+
+/* Modo Oscuro */
+.dark-mode .estudiante-evaluar__breadcrumb {
+  color: var(--color-text-secondary);
+}
+
+.dark-mode .estudiante-evaluar__title {
+  color: var(--color-text-primary);
+}
+
+.dark-mode .estudiante-evaluar__subtitle {
+  color: var(--color-text-secondary);
+}
+
+.dark-mode .estudiante-evaluar__form-title {
+  color: var(--color-text-primary);
+}
+
+.dark-mode .estudiante-evaluar__form-description {
+  color: var(--color-text-secondary);
+}
+
+.dark-mode .estudiante-evaluar__section {
+  border-color: var(--color-border);
+}
+
+.dark-mode .estudiante-evaluar__section-header {
+  background: var(--color-bg-secondary);
+}
+
+.dark-mode .estudiante-evaluar__section-header:hover {
+  background: var(--color-bg-dark);
+}
+
+.dark-mode .estudiante-evaluar__section-title {
+  color: var(--color-text-primary);
+}
+
+.dark-mode .estudiante-evaluar__rating-label {
+  color: var(--color-text-secondary);
+}
+
+.dark-mode .estudiante-evaluar__rating-button {
+  background: var(--color-bg-secondary);
+  border-color: var(--color-border);
+  color: var(--color-text-secondary);
+}
+
+.dark-mode .estudiante-evaluar__rating-button:hover {
+  background: rgba(16, 185, 129, 0.2);
+}
+
+.dark-mode .estudiante-evaluar__comments-section {
+  background: var(--color-bg-secondary);
+}
+
+.dark-mode .estudiante-evaluar__textarea {
+  background: var(--color-bg-dark);
+  border-color: var(--color-border);
+  color: var(--color-text-primary);
+}
+
+.dark-mode .estudiante-evaluar__actions {
+  border-top-color: var(--color-border);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .estudiante-evaluar__header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .estudiante-evaluar__form-container {
+    padding: 1.5rem;
+  }
+
+  .estudiante-evaluar__rating-scale {
+    justify-content: space-between;
+  }
+
+  .estudiante-evaluar__rating-button {
+    width: 40px;
+    height: 40px;
+    font-size: 0.875rem;
+  }
+
+  .estudiante-evaluar__actions {
+    flex-direction: column-reverse;
+  }
+
+  .estudiante-evaluar__actions button {
+    width: 100%;
+  }
+}

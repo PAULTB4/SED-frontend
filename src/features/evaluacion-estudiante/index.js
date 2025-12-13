@@ -1,0 +1,1 @@
+export { useEstudianteData } from './hooks/useEstudianteData';

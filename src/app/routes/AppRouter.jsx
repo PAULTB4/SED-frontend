@@ -2,6 +2,12 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { LandingPage } from '@/pages/landing';
 import { LoginPage } from '@/pages/auth';
 import { 
+  EstudianteDashboard, 
+  EstudiantePerfil, 
+  EstudianteEvaluar,
+  EstudianteExplorar 
+} from '@/pages/estudiante';
+import { 
   DocenteDashboard, 
   DocenteProfile, 
   DocenteEvaluaciones, 
@@ -13,7 +19,7 @@ import {
   ComisionPeriodos, 
   ComisionReportes 
 } from '@/pages/comision';
-import { DocenteLayout, ComisionLayout } from '@/shared/ui/layouts';
+import { EstudianteLayout, DocenteLayout, ComisionLayout } from '@/shared/ui/layouts';
 
 export const AppRouter = () => {
   return (
@@ -27,7 +33,16 @@ export const AppRouter = () => {
         
         {/* Rutas protegidas por rol */}
         {/* <Route path="/estudiante/*" element={<EstudianteDashboard />} /> */}
-        
+        {/* Rutas del Estudiante - ACTIVADAS PARA TESTING */}
+        <Route path="/estudiante" element={<EstudianteLayout />}>
+          <Route path="dashboard" element={<EstudianteDashboard />} />
+          <Route path="perfil" element={<EstudiantePerfil />} />
+          <Route path="evaluar/:cursoId" element={<EstudianteEvaluar />} />
+          <Route path="evaluar-docentes" element={<EstudianteDashboard />} />
+          <Route path="explorar" element={<EstudianteExplorar />} />
+        </Route>
+
+
         {/* Rutas del Docente - ACTIVADAS PARA TESTING */}
         <Route path="/docente" element={<DocenteLayout />}>
           <Route path="dashboard" element={<DocenteDashboard />} />

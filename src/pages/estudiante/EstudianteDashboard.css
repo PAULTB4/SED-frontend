@@ -1,0 +1,238 @@
+.estudiante-dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Header */
+.estudiante-dashboard__header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.estudiante-dashboard__welcome {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.estudiante-dashboard__welcome-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.estudiante-dashboard__title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: white;
+  margin: 0;
+}
+
+.estudiante-dashboard__subtitle {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+}
+
+/* Stats Grid */
+.estudiante-dashboard__stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Section */
+.estudiante-dashboard__section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.estudiante-dashboard__section-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+}
+
+/* Courses Grid */
+.estudiante-dashboard__courses {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Course Card */
+.estudiante-dashboard__course-card {
+  background: var(--color-bg-primary);
+  border: 1px solid #E5E7EB;
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.estudiante-dashboard__course-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.estudiante-dashboard__course-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.estudiante-dashboard__course-code {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #10B981;
+  background: rgba(16, 185, 129, 0.1);
+  padding: 0.25rem 0.75rem;
+  border-radius: 6px;
+}
+
+.estudiante-dashboard__badge-evaluado {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #22c55e;
+  background: rgba(34, 197, 94, 0.1);
+  padding: 0.25rem 0.75rem;
+  border-radius: 6px;
+}
+
+.estudiante-dashboard__course-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+  color: #111827;
+}
+
+.estudiante-dashboard__course-teacher {
+  font-size: 0.875rem;
+  color: #6B7280;
+  margin: 0 0 1.5rem;
+}
+
+/* Buttons */
+.estudiante-dashboard__btn {
+  width: 100%;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.estudiante-dashboard__btn--primary {
+  background: #10B981;
+  color: white;
+}
+
+.estudiante-dashboard__btn--primary:hover {
+  background: #059669;
+  transform: scale(1.02);
+}
+
+.estudiante-dashboard__btn--disabled {
+  background: #E5E7EB;
+  color: #9CA3AF;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Loading State */
+.estudiante-dashboard__loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  gap: 1rem;
+}
+
+.estudiante-dashboard__spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid #E5E7EB;
+  border-top-color: #10B981;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.estudiante-dashboard__loading p {
+  color: #6B7280;
+  font-size: 0.875rem;
+}
+
+/* Error State */
+.estudiante-dashboard__error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  color: #EF4444;
+  font-size: 0.875rem;
+}
+
+/* Modo Oscuro */
+.dark-mode .estudiante-dashboard__section-title {
+  color: var(--color-text-primary);
+}
+
+.dark-mode .estudiante-dashboard__course-card {
+  background: var(--color-bg-secondary);
+  border-color: var(--color-border);
+}
+
+.dark-mode .estudiante-dashboard__course-card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .estudiante-dashboard__course-title {
+  color: var(--color-text-primary);
+}
+
+.dark-mode .estudiante-dashboard__course-teacher {
+  color: var(--color-text-secondary);
+}
+
+.dark-mode .estudiante-dashboard__btn--disabled {
+  background: var(--color-bg-dark);
+  color: var(--color-text-secondary);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .estudiante-dashboard__header {
+    padding: 1.5rem;
+  }
+
+  .estudiante-dashboard__title {
+    font-size: 1.5rem;
+  }
+
+  .estudiante-dashboard__stats {
+    grid-template-columns: 1fr;
+  }
+
+  .estudiante-dashboard__courses {
+    grid-template-columns: 1fr;
+  }
+
+  .estudiante-dashboard__welcome {
+    flex-direction: column;
+    text-align: center;
+  }
+}

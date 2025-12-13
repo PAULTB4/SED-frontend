@@ -1,0 +1,1 @@
+export { EstudianteLayout } from './EstudianteLayout';
