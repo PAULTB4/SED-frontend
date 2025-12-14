@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { LandingPage } from '@/pages/landing';
-import { LoginPage, RegisterPage } from '@/pages/auth';
+import { LoginPage, RegisterPage, ForgotPasswordPage } from '@/pages/auth';
 import { 
   EstudianteDashboard, 
   EstudiantePerfil, 
@@ -28,8 +28,7 @@ export const AppRouter = () => {
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
-        {/* Rutas futuras */}
-        {/* <Route path="/forgot-password" element={<ForgotPasswordPage />} /> */}
+        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         
         {/* Rutas protegidas por rol */}
         {/* <Route path="/estudiante/*" element={<EstudianteDashboard />} /> */}
