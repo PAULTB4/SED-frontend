@@ -144,7 +144,7 @@ El proyecto utiliza **Feature-Sliced Design (FSD)**, una arquitectura moderna qu
 
 1. **Clonar el repositorio**
 ```bash
-git clone https://github.com/team-inkietos/sed-frontend.git](https://github.com/PAULTB4/SED-frontend.git
+git clone https://github.com/PAULTB4/SED-frontend.git
 cd sed-frontend
 ```
 
