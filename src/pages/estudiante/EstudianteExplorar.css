@@ -7,7 +7,7 @@
 .estudiante-explorar__title {
   font-size: 1.75rem;
   font-weight: 700;
-  color: #111827;
+  color: var(--color-text-primary);
   margin: 0;
 }
 
@@ -19,7 +19,7 @@
   background: var(--color-bg-primary);
   padding: 1.5rem;
   border-radius: 12px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-sm);
 }
 
 .estudiante-explorar__search {
@@ -27,8 +27,8 @@
   align-items: center;
   gap: 0.75rem;
   padding: 0.75rem 1rem;
-  background: #F9FAFB;
-  border: 1px solid #D1D5DB;
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
   border-radius: 8px;
   transition: all 0.2s;
 }
@@ -48,12 +48,12 @@
   border: none;
   background: transparent;
   font-size: 0.875rem;
-  color: #111827;
+  color: var(--color-text-primary);
   outline: none;
 }
 
 .estudiante-explorar__search-input::placeholder {
-  color: #9CA3AF;
+  color: var(--color-text-secondary);
 }
 
 .estudiante-explorar__filter-group {
@@ -71,16 +71,16 @@
 .estudiante-explorar__filter-label {
   font-size: 0.875rem;
   font-weight: 600;
-  color: #374151;
+  color: var(--color-text-primary);
 }
 
 .estudiante-explorar__select {
   padding: 0.625rem 1rem;
-  background: white;
-  border: 1px solid #D1D5DB;
+  background: var(--color-bg-primary);
+  border: 1px solid var(--color-border);
   border-radius: 8px;
   font-size: 0.875rem;
-  color: #374151;
+  color: var(--color-text-primary);
   cursor: pointer;
   transition: all 0.2s ease;
 }
@@ -118,22 +118,22 @@
 /* Card */
 .estudiante-explorar__card {
   background: var(--color-bg-primary);
-  border: 1px solid #E5E7EB;
+  border: 1px solid var(--color-border);
   border-radius: 12px;
   overflow: hidden;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 
 .estudiante-explorar__card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 .estudiante-explorar__card-header {
   display: flex;
   justify-content: center;
   padding: 2rem 1.5rem 1rem;
-  background: linear-gradient(135deg, #F9FAFB 0%, #F3F4F6 100%);
+  background: var(--color-bg-secondary);
 }
 
 .estudiante-explorar__card-body {
@@ -148,13 +148,13 @@
 .estudiante-explorar__card-title {
   font-size: 1.125rem;
   font-weight: 600;
-  color: #111827;
+  color: var(--color-text-primary);
   margin: 0;
 }
 
 .estudiante-explorar__card-department {
   font-size: 0.875rem;
-  color: #6B7280;
+  color: var(--color-text-secondary);
   margin: 0;
 }
 
@@ -167,7 +167,7 @@
 .estudiante-explorar__card-rating-value {
   font-size: 1.125rem;
   font-weight: 700;
-  color: #111827;
+  color: var(--color-text-primary);
 }
 
 .estudiante-explorar__card-reviews {

@@ -268,13 +268,13 @@
 }
 
 .dark-mode .comision-layout__nav-link:hover {
-  background: #065f46;
+  background: rgba(16, 185, 129, 0.1);
   color: #10B981;
 }
 
 .dark-mode .comision-layout__nav-link--active {
-  background: #065f46;
-  color: #10B981;
+  background: #10B981;
+  color: white;
 }
 
 .dark-mode .comision-layout__icon-button {
@@ -327,12 +327,251 @@
   background: #374151;
 }
 
+/* Mobile Menu Button */
+.comision-layout__mobile-menu-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: none;
+  color: #6B7280;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.comision-layout__mobile-menu-btn:hover {
+  background: #F3F4F6;
+  color: #10B981;
+}
+
+/* Mobile Menu Overlay */
+.comision-layout__mobile-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 60;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Mobile Menu Sidebar */
+.comision-layout__mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 280px;
+  background: white;
+  z-index: 70;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.comision-layout__mobile-menu--open {
+  transform: translateX(0);
+}
+
+/* Mobile Header */
+.comision-layout__mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #E5E7EB;
+}
+
+.comision-layout__mobile-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #10B981;
+}
+
+.comision-layout__mobile-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: none;
+  color: #6B7280;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.comision-layout__mobile-close:hover {
+  background: #F3F4F6;
+  color: #111827;
+}
+
+/* Mobile Navigation */
+.comision-layout__mobile-nav {
+  flex: 1;
+  padding: 1rem 0;
+  overflow-y: auto;
+}
+
+.comision-layout__mobile-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem 1.5rem;
+  color: #6B7280;
+  text-decoration: none;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.comision-layout__mobile-nav-link:hover {
+  background: #F3F4F6;
+  color: #10B981;
+}
+
+.comision-layout__mobile-nav-link--active {
+  background: #D1FAE5;
+  color: #10B981;
+  border-right: 3px solid #10B981;
+}
+
+/* Mobile Footer */
+.comision-layout__mobile-footer {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid #E5E7EB;
+}
+
+.comision-layout__mobile-user {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.comision-layout__mobile-user-name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+}
+
+.comision-layout__mobile-user-role {
+  font-size: 0.75rem;
+  color: #6B7280;
+  margin: 0;
+}
+
+.comision-layout__mobile-logout {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.625rem 1rem;
+  background: transparent;
+  border: 1px solid #E5E7EB;
+  color: #EF4444;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.comision-layout__mobile-logout:hover {
+  background: #FEE2E2;
+  border-color: #EF4444;
+}
+
+/* Dark Mode Mobile */
+.dark-mode .comision-layout__mobile-menu-btn {
+  color: #d1d5db;
+}
+
+.dark-mode .comision-layout__mobile-menu-btn:hover {
+  background: #374151;
+  color: #10B981;
+}
+
+.dark-mode .comision-layout__mobile-menu {
+  background: #1f2937;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.5);
+}
+
+.dark-mode .comision-layout__mobile-header {
+  border-bottom-color: #374151;
+}
+
+.dark-mode .comision-layout__mobile-close {
+  color: #d1d5db;
+}
+
+.dark-mode .comision-layout__mobile-close:hover {
+  background: #374151;
+  color: #f9fafb;
+}
+
+.dark-mode .comision-layout__mobile-nav-link {
+  color: #d1d5db;
+}
+
+.dark-mode .comision-layout__mobile-nav-link:hover {
+  background: #374151;
+  color: #10B981;
+}
+
+.dark-mode .comision-layout__mobile-nav-link--active {
+  background: rgba(16, 185, 129, 0.2);
+  color: #10B981;
+}
+
+.dark-mode .comision-layout__mobile-footer {
+  border-top-color: #374151;
+}
+
+.dark-mode .comision-layout__mobile-user-name {
+  color: #f9fafb;
+}
+
+.dark-mode .comision-layout__mobile-user-role {
+  color: #9ca3af;
+}
+
+.dark-mode .comision-layout__mobile-logout {
+  background: transparent;
+  border-color: #374151;
+  color: #EF4444;
+}
+
+.dark-mode .comision-layout__mobile-logout:hover {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: #EF4444;
+}
+
 /* Responsive */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
+  .comision-layout__mobile-menu-btn {
+    display: flex;
+  }
+
   .comision-layout__nav-links {
     display: none;
   }
-  
+}
+
+@media (max-width: 768px) {
   .comision-layout__user-name {
     display: none;
   }

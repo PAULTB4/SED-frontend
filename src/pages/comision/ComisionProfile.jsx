@@ -1,8 +1,10 @@
+import { useTranslation } from 'react-i18next';
 import { useComisionData } from '../../features/evaluacion-comision';
 import { Avatar, StatCard } from '../../shared/ui/components';
 import './ComisionProfile.css';
 
 export const ComisionProfile = () => {
+  const { t } = useTranslation();
   const { data, loading, error } = useComisionData();
 
   if (loading) {
@@ -10,7 +12,7 @@ export const ComisionProfile = () => {
       <div className="comision-profile">
         <div className="loading-state">
           <div className="spinner"></div>
-          <p>Cargando perfil...</p>
+          <p>{t('common.loading')}</p>
         </div>
       </div>
     );
@@ -44,7 +46,7 @@ export const ComisionProfile = () => {
 
       {/* Información de contacto */}
       <section className="profile-section">
-        <h2>Información de Contacto</h2>
+        <h2>{t('comision.profile.contactInfo')}</h2>
         <div className="info-grid">
           <div className="info-item">
             <div className="info-icon">
@@ -54,7 +56,7 @@ export const ComisionProfile = () => {
               </svg>
             </div>
             <div className="info-content">
-              <label>Correo Electrónico</label>
+              <label>{t('comision.profile.email')}</label>
               <p>{comision.email}</p>
             </div>
           </div>
@@ -66,7 +68,7 @@ export const ComisionProfile = () => {
               </svg>
             </div>
             <div className="info-content">
-              <label>Teléfono</label>
+              <label>{t('comision.profile.phone')}</label>
               <p>{comision.telefono}</p>
             </div>
           </div>
@@ -79,7 +81,7 @@ export const ComisionProfile = () => {
               </svg>
             </div>
             <div className="info-content">
-              <label>Oficina</label>
+              <label>{t('comision.profile.office')}</label>
               <p>{comision.oficina}</p>
             </div>
           </div>
@@ -92,7 +94,7 @@ export const ComisionProfile = () => {
               </svg>
             </div>
             <div className="info-content">
-              <label>Dependencia</label>
+              <label>{t('comision.profile.dependency')}</label>
               <p>{comision.facultad}</p>
             </div>
           </div>
@@ -105,7 +107,7 @@ export const ComisionProfile = () => {
               </svg>
             </div>
             <div className="info-content">
-              <label>Anexo</label>
+              <label>{t('comision.profile.annex')}</label>
               <p>{comision.anexo}</p>
             </div>
           </div>
@@ -114,7 +116,7 @@ export const ComisionProfile = () => {
 
       {/* Responsabilidades */}
       <section className="profile-section">
-        <h2>Responsabilidades del Cargo</h2>
+        <h2>{t('comision.profile.responsibilities')}</h2>
         <div className="responsibilities-list">
           {comision.responsabilidades.map((responsabilidad, index) => (
             <div key={index} className="responsibility-item">
@@ -131,12 +133,12 @@ export const ComisionProfile = () => {
 
       {/* Estadísticas de gestión */}
       <section className="profile-section">
-        <h2>Estadísticas de Gestión</h2>
+        <h2>{t('comision.profile.managementStats')}</h2>
         <div className="stats-grid">
           <StatCard
-            title="Docentes Gestionados"
+            title={t('comision.profile.managedTeachers')}
             value={estadisticas.docentesEvaluados}
-            subtitle="Total en período actual"
+            subtitle={t('comision.profile.totalCurrentPeriod')}
             borderColor="#10B981"
             icon={
               <svg viewBox="0 0 24 24" fill="none">
@@ -145,9 +147,9 @@ export const ComisionProfile = () => {
             }
           />
           <StatCard
-            title="Encuestas Configuradas"
+            title={t('comision.profile.configuredSurveys')}
             value={estadisticas.encuestasConfigur}
-            subtitle="Cuestionarios activos"
+            subtitle={t('comision.profile.activeSurveys')}
             borderColor="#3B82F6"
             icon={
               <svg viewBox="0 0 24 24" fill="none">
@@ -157,9 +159,9 @@ export const ComisionProfile = () => {
             }
           />
           <StatCard
-            title="Reportes Generados"
+            title={t('comision.profile.generatedReports')}
             value={estadisticas.reportesGenerados}
-            subtitle="Documentos exportados"
+            subtitle={t('comision.profile.exportedDocuments')}
             borderColor="#F59E0B"
             icon={
               <svg viewBox="0 0 24 24" fill="none">
@@ -169,9 +171,9 @@ export const ComisionProfile = () => {
             }
           />
           <StatCard
-            title="Períodos Activos"
+            title={t('comision.profile.activePeriods')}
             value={estadisticas.periodosActivos}
-            subtitle="En ejecución"
+            subtitle={t('comision.profile.inProgress')}
             borderColor="#8B5CF6"
             icon={
               <svg viewBox="0 0 24 24" fill="none">

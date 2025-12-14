@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { BarChart, LineChart, StarRating } from '@/shared/ui/components';
 import { useDocenteData } from '@/features/evaluaciones-docente';
 import './DocenteEvaluaciones.css';
@@ -9,6 +10,7 @@ import './DocenteEvaluaciones.css';
  * Muestra gráficos y tabla de evaluaciones por curso
  */
 export const DocenteEvaluaciones = () => {
+  const { t } = useTranslation();
   const [searchParams] = useSearchParams();
   const { data, loading } = useDocenteData();
   const [selectedCurso, setSelectedCurso] = useState(searchParams.get('curso') || '1');
@@ -17,7 +19,7 @@ export const DocenteEvaluaciones = () => {
     return (
       <div className="docente-evaluaciones__loading">
         <div className="docente-evaluaciones__spinner"></div>
-        <p>Cargando evaluaciones...</p>
+        <p>{t('common.loading')}</p>
       </div>
     );
   }
@@ -27,10 +29,10 @@ export const DocenteEvaluaciones = () => {
 
   // Datos mock para gráficos
   const categoriesData = [
-    { label: 'Dominio de materia', value: 4.9 },
-    { label: 'Metodología', value: 4.7 },
-    { label: 'Interacción', value: 4.8 },
-    { label: 'Evaluación', value: 4.6 }
+    { label: t('estudiante.evaluate.domainTitle'), value: 4.9 },
+    { label: t('estudiante.evaluate.methodologyTitle'), value: 4.7 },
+    { label: t('estudiante.evaluate.interactionTitle'), value: 4.8 },
+    { label: t('estudiante.evaluate.evaluationSystemTitle'), value: 4.6 }
   ];
 
   const temporalData = [
@@ -76,7 +78,7 @@ export const DocenteEvaluaciones = () => {
   return (
     <div className="docente-evaluaciones">
         <div className="docente-evaluaciones__header">
-          <h1 className="docente-evaluaciones__title">Mis Evaluaciones</h1>
+          <h1 className="docente-evaluaciones__title">{t('docente.evaluations.title')}</h1>
           
           <select 
             className="docente-evaluaciones__select"
@@ -95,14 +97,14 @@ export const DocenteEvaluaciones = () => {
         <div className="docente-evaluaciones__charts">
           <div className="docente-evaluaciones__chart-card">
             <h3 className="docente-evaluaciones__chart-title">
-              Promedio por Categoría
+              {t('docente.evaluations.categoryAverage')}
             </h3>
             <BarChart data={categoriesData} maxValue={5} color="#10B981" />
           </div>
 
           <div className="docente-evaluaciones__chart-card">
             <h3 className="docente-evaluaciones__chart-title">
-              Evolución Temporal
+              {t('docente.evaluations.temporalEvolution')}
             </h3>
             <LineChart data={temporalData} maxValue={5} color="#10B981" />
           </div>
@@ -111,17 +113,17 @@ export const DocenteEvaluaciones = () => {
         {/* Tabla de Evaluaciones Individuales */}
         <div className="docente-evaluaciones__table-card">
           <h3 className="docente-evaluaciones__table-title">
-            Evaluaciones Individuales
+            {t('docente.evaluations.individualEvaluations')}
           </h3>
           
           <div className="docente-evaluaciones__table-container">
             <table className="docente-evaluaciones__table">
               <thead>
                 <tr>
-                  <th>Fecha</th>
-                  <th>Estudiante</th>
-                  <th>Calificación</th>
-                  <th>Comentario</th>
+                  <th>{t('docente.evaluations.date')}</th>
+                  <th>{t('docente.evaluations.student')}</th>
+                  <th>{t('docente.evaluations.rating')}</th>
+                  <th>{t('docente.evaluations.comment')}</th>
                 </tr>
               </thead>
               <tbody>

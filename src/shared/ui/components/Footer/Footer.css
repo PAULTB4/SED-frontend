@@ -107,3 +107,41 @@
   color: var(--color-text-light);
   font-size: var(--font-size-sm);
 }
+
+/* Dark Mode */
+.dark-mode .footer {
+  background-color: #0F172A;
+  border-top: 1px solid var(--color-border);
+}
+
+.dark-mode .footer__logo-text {
+  color: var(--color-text-primary);
+}
+
+.dark-mode .footer__description {
+  color: var(--color-text-secondary);
+}
+
+.dark-mode .footer__title {
+  color: var(--color-text-primary);
+}
+
+.dark-mode .footer__link {
+  color: var(--color-text-secondary);
+}
+
+.dark-mode .footer__link:hover {
+  color: #10B981;
+}
+
+.dark-mode .footer__contact-item {
+  color: var(--color-text-secondary);
+}
+
+.dark-mode .footer__bottom {
+  border-top-color: var(--color-border);
+}
+
+.dark-mode .footer__copyright {
+  color: var(--color-text-secondary);
+}

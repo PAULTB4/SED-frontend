@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { StatCard, CourseCard, Avatar } from '@/shared/ui/components';
 import { useDocenteData } from '@/features/evaluaciones-docente';
 import './DocenteDashboard.css';
@@ -8,6 +9,7 @@ import './DocenteDashboard.css';
  * Muestra estadísticas generales y lista de cursos
  */
 export const DocenteDashboard = () => {
+  const { t } = useTranslation();
   const { data, loading, error } = useDocenteData();
   const navigate = useNavigate();
 
@@ -15,7 +17,7 @@ export const DocenteDashboard = () => {
     return (
       <div className="docente-dashboard__loading">
         <div className="docente-dashboard__spinner"></div>
-        <p>Cargando datos...</p>
+        <p>{t('common.loading')}</p>
       </div>
     );
   }
@@ -42,7 +44,7 @@ export const DocenteDashboard = () => {
             <Avatar src={docente.avatar} alt={docente.nombre} size="lg" fallback="CM" />
             <div className="docente-dashboard__welcome-text">
               <h1 className="docente-dashboard__title">
-                Bienvenido, {docente.nombre}
+                {t('docente.dashboard.welcome')}, {docente.nombre}
               </h1>
               <p className="docente-dashboard__subtitle">
                 {docente.departamento}
@@ -54,7 +56,7 @@ export const DocenteDashboard = () => {
         {/* Stats Cards */}
         <div className="docente-dashboard__stats">
           <StatCard
-            title="Total de Evaluaciones"
+            title={t('docente.dashboard.totalEvaluations')}
             value={estadisticas.totalEvaluaciones}
             color="green"
             icon={
@@ -65,7 +67,7 @@ export const DocenteDashboard = () => {
           />
           
           <StatCard
-            title="Calificación Promedio"
+            title={t('docente.dashboard.averageRating')}
             value={
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 {estadisticas.promedioGeneral}
@@ -83,7 +85,7 @@ export const DocenteDashboard = () => {
           />
           
           <StatCard
-            title="Tendencia vs Semestre Anterior"
+            title={t('docente.dashboard.trend')}
             value={`+${estadisticas.tendencia}`}
             color="blue"
             icon={
@@ -94,7 +96,7 @@ export const DocenteDashboard = () => {
           />
           
           <StatCard
-            title="Comentarios Recientes"
+            title={t('docente.dashboard.recentComments')}
             value={estadisticas.comentariosRecientes}
             color="green"
             icon={
@@ -107,7 +109,7 @@ export const DocenteDashboard = () => {
 
         {/* Mis Cursos */}
         <div className="docente-dashboard__section">
-          <h2 className="docente-dashboard__section-title">Mis Cursos</h2>
+          <h2 className="docente-dashboard__section-title">{t('docente.dashboard.myCourses')}</h2>
           <div className="docente-dashboard__courses">
             {cursos.map((curso) => (
               <CourseCard

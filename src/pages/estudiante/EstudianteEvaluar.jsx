@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Avatar, Button } from '@/shared/ui/components';
 import './EstudianteEvaluar.css';
 
@@ -8,6 +9,7 @@ import './EstudianteEvaluar.css';
  * Formulario de evaluación con criterios y comentarios
  */
 export const EstudianteEvaluar = () => {
+  const { t } = useTranslation();
   const { cursoId } = useParams();
   const navigate = useNavigate();
   
@@ -94,8 +96,8 @@ export const EstudianteEvaluar = () => {
         ))}
       </div>
       <div className="estudiante-evaluar__rating-labels">
-        <span>Muy deficiente</span>
-        <span>Excelente</span>
+        <span>{t('estudiante.evaluate.veryPoor')}</span>
+        <span>{t('estudiante.evaluate.excellent')}</span>
       </div>
     </div>
   );
@@ -104,9 +106,9 @@ export const EstudianteEvaluar = () => {
     <div className="estudiante-evaluar">
       {/* Breadcrumb */}
       <div className="estudiante-evaluar__breadcrumb">
-        <Link to="/estudiante/dashboard">Inicio</Link>
+        <Link to="/estudiante/dashboard">{t('estudiante.evaluate.home')}</Link>
         <span>/</span>
-        <Link to="/estudiante/evaluar-docentes">Evaluar Docente</Link>
+        <Link to="/estudiante/evaluar-docentes">{t('estudiante.evaluate.evaluateTeacher')}</Link>
         <span>/</span>
         <span>{cursoData.docente.nombre}</span>
       </div>
@@ -116,16 +118,16 @@ export const EstudianteEvaluar = () => {
         <Avatar src={cursoData.docente.avatar} alt={cursoData.docente.nombre} size="lg" fallback="CM" />
         <div className="estudiante-evaluar__header-info">
           <h1 className="estudiante-evaluar__title">{cursoData.docente.nombre}</h1>
-          <p className="estudiante-evaluar__subtitle">Curso: {cursoData.nombre}</p>
+          <p className="estudiante-evaluar__subtitle">{t('estudiante.evaluate.course')}: {cursoData.nombre}</p>
         </div>
       </div>
 
       {/* Formulario */}
       <div className="estudiante-evaluar__form-container">
         <div className="estudiante-evaluar__form-header">
-          <h2 className="estudiante-evaluar__form-title">Formulario de Evaluación</h2>
+          <h2 className="estudiante-evaluar__form-title">{t('estudiante.evaluate.formTitle')}</h2>
           <p className="estudiante-evaluar__form-description">
-            Por favor evalúa cada aspecto del desempeño docente en una escala del 1 al 5
+            {t('estudiante.evaluate.formDescription')}
           </p>
         </div>
 
@@ -136,7 +138,7 @@ export const EstudianteEvaluar = () => {
             className="estudiante-evaluar__section-header"
             onClick={() => toggleSeccion('dominio')}
           >
-            <h3 className="estudiante-evaluar__section-title">Dominio de la materia</h3>
+            <h3 className="estudiante-evaluar__section-title">{t('estudiante.evaluate.domainTitle')}</h3>
             <svg 
               width="20" 
               height="20" 
@@ -152,12 +154,12 @@ export const EstudianteEvaluar = () => {
             <div className="estudiante-evaluar__section-content">
               <RatingScale
                 criterio="conocimientoProfundo"
-                label="El docente demuestra conocimiento profundo de la materia"
+                label={t('estudiante.evaluate.deepKnowledge')}
                 valor={evaluacion.conocimientoProfundo}
               />
               <RatingScale
                 criterio="explicacionClara"
-                label="Explica con claridad los conceptos y temas del curso"
+                label={t('estudiante.evaluate.clearExplanation')}
                 valor={evaluacion.explicacionClara}
               />
             </div>
@@ -171,7 +173,7 @@ export const EstudianteEvaluar = () => {
             className="estudiante-evaluar__section-header"
             onClick={() => toggleSeccion('metodologia')}
           >
-            <h3 className="estudiante-evaluar__section-title">Metodología de enseñanza</h3>
+            <h3 className="estudiante-evaluar__section-title">{t('estudiante.evaluate.methodologyTitle')}</h3>
             <svg 
               width="20" 
               height="20" 
@@ -187,12 +189,12 @@ export const EstudianteEvaluar = () => {
             <div className="estudiante-evaluar__section-content">
               <RatingScale
                 criterio="metodologiaEfectiva"
-                label="Utiliza metodologías de enseñanza efectivas"
+                label={t('estudiante.evaluate.effectiveMethodology')}
                 valor={evaluacion.metodologiaEfectiva}
               />
               <RatingScale
                 criterio="recursosDidacticos"
-                label="Emplea recursos didácticos apropiados (presentaciones, ejemplos, casos prácticos)"
+                label={t('estudiante.evaluate.teachingResources')}
                 valor={evaluacion.recursosDidacticos}
               />
             </div>
@@ -206,7 +208,7 @@ export const EstudianteEvaluar = () => {
             className="estudiante-evaluar__section-header"
             onClick={() => toggleSeccion('interaccion')}
           >
-            <h3 className="estudiante-evaluar__section-title">Interacción con estudiantes</h3>
+            <h3 className="estudiante-evaluar__section-title">{t('estudiante.evaluate.interactionTitle')}</h3>
             <svg 
               width="20" 
               height="20" 
@@ -222,12 +224,12 @@ export const EstudianteEvaluar = () => {
             <div className="estudiante-evaluar__section-content">
               <RatingScale
                 criterio="disposicionAyuda"
-                label="Muestra disposición para ayudar y resolver dudas"
+                label={t('estudiante.evaluate.willingnessToHelp')}
                 valor={evaluacion.disposicionAyuda}
               />
               <RatingScale
                 criterio="respetoEstudiantes"
-                label="Trata con respeto y equidad a todos los estudiantes"
+                label={t('estudiante.evaluate.respectStudents')}
                 valor={evaluacion.respetoEstudiantes}
               />
             </div>
@@ -241,7 +243,7 @@ export const EstudianteEvaluar = () => {
             className="estudiante-evaluar__section-header"
             onClick={() => toggleSeccion('sistema')}
           >
-            <h3 className="estudiante-evaluar__section-title">Sistema de evaluación</h3>
+            <h3 className="estudiante-evaluar__section-title">{t('estudiante.evaluate.evaluationSystemTitle')}</h3>
             <svg 
               width="20" 
               height="20" 
@@ -257,12 +259,12 @@ export const EstudianteEvaluar = () => {
             <div className="estudiante-evaluar__section-content">
               <RatingScale
                 criterio="criteriosTransparentes"
-                label="Los criterios de evaluación son claros y transparentes"
+                label={t('estudiante.evaluate.transparentCriteria')}
                 valor={evaluacion.criteriosTransparentes}
               />
               <RatingScale
                 criterio="retroalimentacion"
-                label="Proporciona retroalimentación oportuna y constructiva"
+                label={t('estudiante.evaluate.timelyFeedback')}
                 valor={evaluacion.retroalimentacion}
               />
             </div>
@@ -271,10 +273,10 @@ export const EstudianteEvaluar = () => {
 
         {/* Comentarios adicionales */}
         <div className="estudiante-evaluar__comments-section">
-          <h3 className="estudiante-evaluar__section-title">Comentarios adicionales</h3>
+          <h3 className="estudiante-evaluar__section-title">{t('estudiante.evaluate.additionalComments')}</h3>
           <textarea
             className="estudiante-evaluar__textarea"
-            placeholder="Comparte tus comentarios sobre el desempeño del docente (opcional)"
+            placeholder={t('estudiante.evaluate.commentsPlaceholder')}
             rows="5"
             value={evaluacion.comentarios}
             onChange={(e) => setEvaluacion({ ...evaluacion, comentarios: e.target.value })}
@@ -287,13 +289,13 @@ export const EstudianteEvaluar = () => {
             variant="outline" 
             onClick={() => navigate('/estudiante/dashboard')}
           >
-            Cancelar
+            {t('estudiante.evaluate.cancel')}
           </Button>
           <Button 
             variant="primary"
             onClick={handleSubmit}
           >
-            Enviar Evaluación
+            {t('estudiante.evaluate.submit')}
           </Button>
         </div>
       </div>

@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Button } from '@/shared/ui/components';
 import { useAuth } from '../hooks/useAuth';
 import './LoginForm.css';
 
 export const LoginForm = () => {
+  const { t } = useTranslation();
   const { login, loading, error } = useAuth();
   
   const [formData, setFormData] = useState({
@@ -36,16 +38,16 @@ export const LoginForm = () => {
 
     // Validar email
     if (!formData.email) {
-      errors.email = 'El correo electrónico es requerido';
+      errors.email = t('auth.emailRequired');
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      errors.email = 'El correo electrónico no es válido';
+      errors.email = t('auth.emailInvalid');
     }
 
     // Validar password
     if (!formData.password) {
-      errors.password = 'La contraseña es requerida';
+      errors.password = t('auth.passwordRequired');
     } else if (formData.password.length < 6) {
-      errors.password = 'La contraseña debe tener al menos 6 caracteres';
+      errors.password = t('auth.passwordMin');
     }
 
     setValidationErrors(errors);
@@ -84,7 +86,7 @@ export const LoginForm = () => {
       {/* Campo Email */}
       <div className="login-form__field">
         <label htmlFor="email" className="login-form__label">
-          Correo electrónico institucional
+          {t('auth.email')}
         </label>
         <div className="login-form__input-wrapper">
           <svg 
@@ -117,7 +119,7 @@ export const LoginForm = () => {
       {/* Campo Password */}
       <div className="login-form__field">
         <label htmlFor="password" className="login-form__label">
-          Contraseña
+          {t('auth.password')}
         </label>
         <div className="login-form__input-wrapper">
           <svg 
@@ -171,10 +173,10 @@ export const LoginForm = () => {
       <div className="login-form__options">
         <label className="login-form__checkbox">
           <input type="checkbox" />
-          <span>Recordarme</span>
+          <span>{t('auth.rememberMe')}</span>
         </label>
         <Link to="/forgot-password" className="login-form__link">
-          ¿Olvidaste tu contraseña?
+          {t('auth.forgotPassword')}
         </Link>
       </div>
 
@@ -212,23 +214,23 @@ export const LoginForm = () => {
                 />
               </circle>
             </svg>
-            Iniciando sesión...
+            {t('auth.loggingIn')}
           </>
         ) : (
-          'Iniciar sesión'
+          t('auth.login')
         )}
       </Button>
 
       {/* Divider */}
       <div className="login-form__divider">
-        <span>o</span>
+        <span>{t('auth.or')}</span>
       </div>
 
       {/* Registro */}
       <p className="login-form__register">
-        ¿No tienes una cuenta?{' '}
+        {t('auth.noAccount')}{' '}
         <Link to="/register" className="login-form__link login-form__link--primary">
-          Regístrate aquí
+          {t('auth.register')}
         </Link>
       </p>
     </form>

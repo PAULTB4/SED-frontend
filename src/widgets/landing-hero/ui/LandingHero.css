@@ -141,3 +141,21 @@
     transform: translateX(0);
   }
 }
+
+/* Dark Mode */
+.dark-mode .hero {
+  background: linear-gradient(to bottom, var(--color-bg-dark), var(--color-bg-secondary));
+}
+
+.dark-mode .hero__badge {
+  background-color: rgba(16, 185, 129, 0.1);
+  color: #10B981;
+}
+
+.dark-mode .hero__title {
+  color: var(--color-text-primary);
+}
+
+.dark-mode .hero__description {
+  color: var(--color-text-secondary);
+}

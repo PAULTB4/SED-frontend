@@ -2,8 +2,14 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background: var(--color-bg-secondary);
 }
 
 .landing-layout__main {
   flex: 1;
+}
+
+/* Dark Mode */
+.dark-mode .landing-layout {
+  background: var(--color-bg-dark);
 }

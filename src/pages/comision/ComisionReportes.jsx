@@ -1,9 +1,11 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useComisionData } from '../../features/evaluacion-comision';
 import { BarChart, PieChart, LineChart } from '../../shared/ui/components';
 import './ComisionReportes.css';
 
 export const ComisionReportes = () => {
+  const { t } = useTranslation();
   const { data, loading, error } = useComisionData();
   const [selectedPeriodo, setSelectedPeriodo] = useState('todos');
 
@@ -12,7 +14,7 @@ export const ComisionReportes = () => {
       <div className="comision-reportes">
         <div className="loading-state">
           <div className="spinner"></div>
-          <p>Cargando reportes...</p>
+          <p>{t('common.loading')}</p>
         </div>
       </div>
     );
@@ -60,22 +62,22 @@ export const ComisionReportes = () => {
       {/* Header */}
       <div className="reportes-header">
         <div>
-          <h1>Reportes y Estadísticas</h1>
-          <p>Análisis y métricas del sistema de evaluación docente</p>
+          <h1>{t('comision.reports.title')}</h1>
+          <p>{t('comision.reports.subtitle')}</p>
         </div>
       </div>
 
       {/* Filtros y Acciones */}
       <div className="reportes-controls">
         <div className="control-group">
-          <label htmlFor="periodo-select">Período:</label>
+          <label htmlFor="periodo-select">{t('comision.reports.period')}:</label>
           <select
             id="periodo-select"
             value={selectedPeriodo}
             onChange={(e) => setSelectedPeriodo(e.target.value)}
             className="periodo-select"
           >
-            <option value="todos">Todos los períodos</option>
+            <option value="todos">{t('comision.reports.allPeriods')}</option>
             {periodos.map(periodo => (
               <option key={periodo.id} value={periodo.id}>
                 {periodo.nombre}
@@ -93,7 +95,7 @@ export const ComisionReportes = () => {
               <line x1="16" y1="17" x2="8" y2="17" />
               <polyline points="10 9 9 9 8 9" />
             </svg>
-            <span>Exportar PDF</span>
+            <span>{t('comision.reports.exportPDF')}</span>
           </button>
 
           <button className="btn-export btn-excel">
@@ -102,7 +104,7 @@ export const ComisionReportes = () => {
               <polyline points="7 10 12 15 17 10" />
               <line x1="12" y1="15" x2="12" y2="3" />
             </svg>
-            <span>Exportar Excel</span>
+            <span>{t('comision.reports.exportExcel')}</span>
           </button>
         </div>
       </div>
@@ -117,7 +119,7 @@ export const ComisionReportes = () => {
           </div>
           <div className="stat-content">
             <h3>{estadisticas.docentesEvaluados}</h3>
-            <p>Docentes Evaluados</p>
+            <p>{t('comision.reports.evaluatedTeachers')}</p>
           </div>
         </div>
 
@@ -129,7 +131,7 @@ export const ComisionReportes = () => {
           </div>
           <div className="stat-content">
             <h3>{estadisticas.estudiantesParticipantes.toLocaleString()}</h3>
-            <p>Estudiantes Participantes</p>
+            <p>{t('comision.reports.participatingStudents')}</p>
           </div>
         </div>
 
@@ -141,7 +143,7 @@ export const ComisionReportes = () => {
           </div>
           <div className="stat-content">
             <h3>{estadisticas.tasaRespuesta}%</h3>
-            <p>Tasa de Respuesta</p>
+            <p>{t('comision.reports.responseRate')}</p>
           </div>
         </div>
       </div>
@@ -151,8 +153,8 @@ export const ComisionReportes = () => {
         {/* Tasa de Respuesta por Facultad */}
         <div className="chart-card">
           <div className="chart-header">
-            <h3>Tasa de Respuesta por Facultad</h3>
-            <p>Porcentaje de participación estudiantil</p>
+            <h3>{t('comision.reports.responseByFaculty')}</h3>
+            <p>{t('comision.reports.responseByFacultyDesc')}</p>
           </div>
           <div className="chart-body">
             <BarChart
@@ -168,8 +170,8 @@ export const ComisionReportes = () => {
         {/* Distribución de Calificaciones */}
         <div className="chart-card">
           <div className="chart-header">
-            <h3>Distribución de Calificaciones</h3>
-            <p>Categorización de resultados de evaluación</p>
+            <h3>{t('comision.reports.ratingDistribution')}</h3>
+            <p>{t('comision.reports.ratingDistributionDesc')}</p>
           </div>
           <div className="chart-body">
             <PieChart data={distribucionData} size={280} />
@@ -179,8 +181,8 @@ export const ComisionReportes = () => {
         {/* Promedio por Dimensión */}
         <div className="chart-card">
           <div className="chart-header">
-            <h3>Promedio por Dimensión Evaluada</h3>
-            <p>Calificaciones por área de evaluación</p>
+            <h3>{t('comision.reports.averageByDimension')}</h3>
+            <p>{t('comision.reports.averageByDimensionDesc')}</p>
           </div>
           <div className="chart-body">
             <BarChart
@@ -195,8 +197,8 @@ export const ComisionReportes = () => {
         {/* Tendencia de Participación */}
         <div className="chart-card full-width">
           <div className="chart-header">
-            <h3>Tendencia de Participación Mensual</h3>
-            <p>Evolución de participación de estudiantes en el tiempo</p>
+            <h3>{t('comision.reports.monthlyTrend')}</h3>
+            <p>{t('comision.reports.monthlyTrendDesc')}</p>
           </div>
           <div className="chart-body">
             <LineChart
@@ -210,18 +212,18 @@ export const ComisionReportes = () => {
 
       {/* Tabla de Reportes Recientes */}
       <div className="recent-reports-section">
-        <h2>Reportes Recientes</h2>
+        <h2>{t('comision.reports.recentReports')}</h2>
         <div className="reports-table">
           <table>
             <thead>
               <tr>
-                <th>Título</th>
-                <th>Tipo</th>
-                <th>Período</th>
-                <th>Fecha</th>
-                <th>Formato</th>
-                <th>Tamaño</th>
-                <th>Acciones</th>
+                <th>{t('comision.reports.title')}</th>
+                <th>{t('comision.reports.type')}</th>
+                <th>{t('comision.reports.period')}</th>
+                <th>{t('comision.reports.date')}</th>
+                <th>{t('comision.reports.format')}</th>
+                <th>{t('comision.reports.size')}</th>
+                <th>{t('comision.reports.actions')}</th>
               </tr>
             </thead>
             <tbody>

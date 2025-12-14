@@ -139,13 +139,13 @@
 .auth-layout__title {
   font-size: var(--font-size-3xl);
   font-weight: 800;
-  color: var(--color-text-primary);
+  color: #111827;
   margin-bottom: var(--spacing-2);
 }
 
 .auth-layout__subtitle {
   font-size: var(--font-size-base);
-  color: var(--color-text-secondary);
+  color: #4B5563;
   line-height: 1.6;
 }
 

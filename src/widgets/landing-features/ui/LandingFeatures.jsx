@@ -1,7 +1,10 @@
 import { Card } from '@/shared/ui/components';
+import { useTranslation } from 'react-i18next';
 import './LandingFeatures.css';
 
 export const LandingFeatures = () => {
+  const { t } = useTranslation();
+  
   const features = [
     {
       id: 1,
@@ -19,8 +22,8 @@ export const LandingFeatures = () => {
           />
         </svg>
       ),
-      title: '100% Anónimo',
-      description: 'Tus evaluaciones son totalmente anónimas, garantizando transparencia y sinceridad.'
+      title: t('landing.features.feature1Title'),
+      description: t('landing.features.feature1Desc')
     },
     {
       id: 2,
@@ -33,8 +36,8 @@ export const LandingFeatures = () => {
           />
         </svg>
       ),
-      title: 'Datos en tiempo real',
-      description: 'Resultados procesados instantáneamente para una retroalimentación oportuna.'
+      title: t('landing.features.feature2Title'),
+      description: t('landing.features.feature2Desc')
     },
     {
       id: 3,
@@ -44,8 +47,8 @@ export const LandingFeatures = () => {
           <path d="M7 8h10M7 12h10M7 16h6" stroke="currentColor" strokeWidth="2"/>
         </svg>
       ),
-      title: 'Fácil de usar',
-      description: 'Interfaz intuitiva que permite completar evaluaciones rápidamente desde cualquier dispositivo.'
+      title: t('landing.features.feature3Title'),
+      description: t('landing.features.feature3Desc')
     }
   ];
 
@@ -57,13 +60,13 @@ export const LandingFeatures = () => {
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
               <path d="M13 10V3L4 14h7v7l9-11h-7z" fill="currentColor"/>
             </svg>
-            Por qué SED
+            {t('landing.features.badge')}
           </span>
           <h2 className="features__title">
-            Una plataforma diseñada para la comunidad universitaria
+            {t('landing.features.title')}
           </h2>
           <p className="features__description">
-            Facilitamos la recopilación y análisis de evaluaciones para mejorar la calidad educativa.
+            {t('landing.features.description')}
           </p>
         </div>
 

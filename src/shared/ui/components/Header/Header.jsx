@@ -1,14 +1,33 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Button } from '../Button';
+import { useTranslation } from 'react-i18next';
+import { Button, LanguageSwitcher } from '../';
 import './Header.css';
 
 export const Header = () => {
+  const { t } = useTranslation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [darkMode, setDarkMode] = useState(() => {
+    return localStorage.getItem('darkMode') === 'true';
+  });
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+  };
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add('dark-mode');
+      localStorage.setItem('darkMode', 'true');
+    } else {
+      document.documentElement.classList.remove('dark-mode');
+      localStorage.setItem('darkMode', 'false');
+    }
+  }, [darkMode]);
 
   return (
     <header className="header">
@@ -42,7 +61,7 @@ export const Header = () => {
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                   <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" stroke="currentColor" strokeWidth="2"/>
                 </svg>
-                Inicio
+                {t('header.home')}
               </a>
             </li>
             <li>
@@ -51,7 +70,7 @@ export const Header = () => {
                   <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/>
                   <path d="M12 6v6l4 2" stroke="currentColor" strokeWidth="2"/>
                 </svg>
-                Objetivos
+                {t('header.objectives')}
               </a>
             </li>
             <li>
@@ -60,13 +79,27 @@ export const Header = () => {
                   <path d="M4 19.5A2.5 2.5 0 016.5 17H20" stroke="currentColor" strokeWidth="2"/>
                   <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z" stroke="currentColor" strokeWidth="2"/>
                 </svg>
-                Manual
+                {t('header.manual')}
               </a>
             </li>
           </ul>
 
-          {/* Botón Iniciar Sesión */}
+          {/* Acciones: Dark Mode + Idioma + Iniciar Sesión */}
           <div className="header__actions">
+            {/* Botón Dark Mode */}
+            <button 
+              className="header__icon-button"
+              onClick={toggleDarkMode}
+              aria-label={t('common.darkMode')}
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" stroke="currentColor" strokeWidth="2"/>
+              </svg>
+            </button>
+
+            {/* Selector de Idioma */}
+            <LanguageSwitcher />
+
             <Link to="/login">
               <Button 
                 variant="primary" 
@@ -77,7 +110,7 @@ export const Header = () => {
                   </svg>
                 }
               >
-                Iniciar sesión
+                {t('header.login')}
               </Button>
             </Link>
           </div>
@@ -99,17 +132,17 @@ export const Header = () => {
           <ul className="header__mobile-list">
             <li>
               <a href="#inicio" className="header__mobile-link" onClick={toggleMenu}>
-                Inicio
+                {t('header.home')}
               </a>
             </li>
             <li>
               <a href="#objetivos" className="header__mobile-link" onClick={toggleMenu}>
-                Objetivos
+                {t('header.objectives')}
               </a>
             </li>
             <li>
               <a href="#manual" className="header__mobile-link" onClick={toggleMenu}>
-                Manual
+                {t('header.manual')}
               </a>
             </li>
             <li>
@@ -118,7 +151,7 @@ export const Header = () => {
                 size="md"
                 fullWidth
                 onClick={() => window.location.href = '/login'}>
-                Iniciar sesión
+                {t('header.login')}
               </Button>
             </li>
           </ul>

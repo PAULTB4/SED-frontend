@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import './Footer.css';
 
 export const Footer = () => {
+  const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
 
   return (
@@ -31,27 +33,27 @@ export const Footer = () => {
               <span className="footer__logo-text">SED</span>
             </div>
             <p className="footer__description">
-              Sistema de Evaluación Docente
+              {t('common.sed')}
             </p>
           </div>
 
           {/* Enlaces útiles */}
           <div className="footer__section">
-            <h3 className="footer__title">Enlaces útiles</h3>
+            <h3 className="footer__title">{t('footer.links')}</h3>
             <ul className="footer__links">
               <li>
                 <Link to="/politica-privacidad" className="footer__link">
-                  Política de privacidad
+                  {t('footer.privacy')}
                 </Link>
               </li>
               <li>
                 <Link to="/terminos" className="footer__link">
-                  Términos y condiciones
+                  {t('footer.terms')}
                 </Link>
               </li>
               <li>
                 <Link to="/preguntas-frecuentes" className="footer__link">
-                  Preguntas frecuentes
+                  {t('footer.faq')}
                 </Link>
               </li>
             </ul>
@@ -59,7 +61,7 @@ export const Footer = () => {
 
           {/* Contacto */}
           <div className="footer__section">
-            <h3 className="footer__title">Contacto</h3>
+            <h3 className="footer__title">{t('footer.contact')}</h3>
             <ul className="footer__contact">
               <li className="footer__contact-item">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none">

@@ -1,7 +1,9 @@
 import { Card } from '@/shared/ui/components';
+import { useTranslation } from 'react-i18next';
 import './LandingVision.css';
 
 export const LandingVision = () => {
+  const { t } = useTranslation();
   return (
     <section className="vision" id="objetivos">
       <div className="container">
@@ -11,9 +13,9 @@ export const LandingVision = () => {
               <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/>
               <path d="M12 6v6l4 2" stroke="currentColor" strokeWidth="2"/>
             </svg>
-            Objetivos
+            {t('landing.vision.badge')}
           </span>
-          <h2 className="vision__title">Nuestra visión y misión</h2>
+          <h2 className="vision__title">{t('landing.vision.title')}</h2>
         </div>
 
         <div className="vision__grid">
@@ -33,12 +35,10 @@ export const LandingVision = () => {
                   />
                 </svg>
               </div>
-              <h3 className="vision__card-title">Visión</h3>
+              <h3 className="vision__card-title">{t('landing.vision.visionTitle')}</h3>
             </div>
             <p className="vision__card-description">
-              Ser la plataforma referente en América Latina en gestión de calidad docente 
-              participativa, promoviendo una cultura de evaluación constante y mejora continua 
-              en la educación superior.
+              {t('landing.vision.visionDesc')}
             </p>
           </Card>
 
@@ -57,12 +57,10 @@ export const LandingVision = () => {
                   />
                 </svg>
               </div>
-              <h3 className="vision__card-title">Misión</h3>
+              <h3 className="vision__card-title">{t('landing.vision.missionTitle')}</h3>
             </div>
             <p className="vision__card-description">
-              Brindar a la comunidad universitaria una herramienta confiable, intuitiva y segura 
-              para evaluar la docencia universitaria, facilitando la toma de decisiones basadas 
-              en datos para mejorar la calidad educativa.
+              {t('landing.vision.missionDesc')}
             </p>
           </Card>
         </div>

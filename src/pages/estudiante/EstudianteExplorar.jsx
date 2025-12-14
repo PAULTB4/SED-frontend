@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { StarRating, Avatar, Button } from '@/shared/ui/components';
 import './EstudianteExplorar.css';
 
@@ -7,6 +8,7 @@ import './EstudianteExplorar.css';
  * Permite buscar y ver evaluaciones de docentes
  */
 export const EstudianteExplorar = () => {
+  const { t } = useTranslation();
   const [searchTerm, setSearchTerm] = useState('');
   const [departamento, setDepartamento] = useState('todos');
   const [calificacionMinima, setCalificacionMinima] = useState('todas');
@@ -82,7 +84,7 @@ export const EstudianteExplorar = () => {
 
   return (
     <div className="estudiante-explorar">
-      <h1 className="estudiante-explorar__title">Explorar Docentes</h1>
+      <h1 className="estudiante-explorar__title">{t('estudiante.explore.title')}</h1>
 
       {/* Barra de búsqueda y filtros */}
       <div className="estudiante-explorar__filters">
@@ -93,7 +95,7 @@ export const EstudianteExplorar = () => {
           </svg>
           <input
             type="text"
-            placeholder="Buscar docente por nombre..."
+            placeholder={t('estudiante.explore.searchPlaceholder')}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="estudiante-explorar__search-input"
@@ -102,13 +104,13 @@ export const EstudianteExplorar = () => {
 
         <div className="estudiante-explorar__filter-group">
           <div className="estudiante-explorar__filter">
-            <label className="estudiante-explorar__filter-label">Departamento</label>
+            <label className="estudiante-explorar__filter-label">{t('estudiante.explore.department')}</label>
             <select
               value={departamento}
               onChange={(e) => setDepartamento(e.target.value)}
               className="estudiante-explorar__select"
             >
-              <option value="todos">Todos los departamentos</option>
+              <option value="todos">{t('estudiante.explore.allDepartments')}</option>
               <option value="Ingeniería de Sistemas">Ingeniería de Sistemas</option>
               <option value="Matemáticas">Matemáticas</option>
               <option value="Física">Física</option>
@@ -117,16 +119,16 @@ export const EstudianteExplorar = () => {
           </div>
 
           <div className="estudiante-explorar__filter">
-            <label className="estudiante-explorar__filter-label">Calificación mínima</label>
+            <label className="estudiante-explorar__filter-label">{t('estudiante.explore.minRating')}</label>
             <select
               value={calificacionMinima}
               onChange={(e) => setCalificacionMinima(e.target.value)}
               className="estudiante-explorar__select"
             >
-              <option value="todas">Todas las calificaciones</option>
-              <option value="4.5">4.5 estrellas o más</option>
-              <option value="4.0">4.0 estrellas o más</option>
-              <option value="3.5">3.5 estrellas o más</option>
+              <option value="todas">{t('estudiante.explore.allRatings')}</option>
+              <option value="4.5">{t('estudiante.explore.rating45')}</option>
+              <option value="4.0">{t('estudiante.explore.rating40')}</option>
+              <option value="3.5">{t('estudiante.explore.rating35')}</option>
             </select>
           </div>
         </div>
@@ -135,7 +137,7 @@ export const EstudianteExplorar = () => {
       {/* Grid de docentes */}
       <div className="estudiante-explorar__results">
         <p className="estudiante-explorar__results-count">
-          {docentesFiltrados.length} {docentesFiltrados.length === 1 ? 'docente encontrado' : 'docentes encontrados'}
+          {t('estudiante.explore.resultsCount', { count: docentesFiltrados.length })}
         </p>
 
         <div className="estudiante-explorar__grid">
@@ -155,13 +157,13 @@ export const EstudianteExplorar = () => {
                 </div>
                 
                 <p className="estudiante-explorar__card-reviews">
-                  {docente.numeroEvaluaciones} evaluaciones
+                  {t('estudiante.explore.evaluations', { count: docente.numeroEvaluaciones })}
                 </p>
               </div>
               
               <div className="estudiante-explorar__card-footer">
                 <Button variant="primary" fullWidth size="sm">
-                  Ver perfil
+                  {t('estudiante.explore.viewProfile')}
                 </Button>
               </div>
             </div>
@@ -174,7 +176,7 @@ export const EstudianteExplorar = () => {
               <circle cx="11" cy="11" r="8" stroke="currentColor" strokeWidth="2"/>
               <path d="M21 21l-4.35-4.35" stroke="currentColor" strokeWidth="2"/>
             </svg>
-            <p>No se encontraron docentes con los filtros seleccionados</p>
+            <p>{t('estudiante.explore.noResults')}</p>
           </div>
         )}
       </div>

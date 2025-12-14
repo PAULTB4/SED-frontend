@@ -85,8 +85,27 @@
   .header__actions {
     display: flex;
     align-items: center;
-    gap: var(--spacing-4);
+    gap: 0.75rem;
   }
+}
+
+.header__icon-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: none;
+  color: #6B7280;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.header__icon-button:hover {
+  background: #D1FAE5;
+  color: #10B981;
 }
 
 /* Hamburguesa */
@@ -168,4 +187,49 @@
 .header__mobile-link:hover {
   background-color: var(--color-primary-light);
   color: var(--color-primary);
+}
+
+/* Dark Mode */
+.dark-mode .header {
+  background-color: rgba(31, 41, 55, 0.95);
+  border-bottom-color: var(--color-border);
+}
+
+.dark-mode .header__logo {
+  color: var(--color-text-primary);
+}
+
+.dark-mode .header__menu-link {
+  color: var(--color-text-secondary);
+}
+
+.dark-mode .header__menu-link:hover {
+  color: #10B981;
+  background-color: rgba(16, 185, 129, 0.1);
+}
+
+.dark-mode .header__icon-button {
+  color: var(--color-text-secondary);
+}
+
+.dark-mode .header__icon-button:hover {
+  background: var(--color-bg-secondary);
+  color: #10B981;
+}
+
+.dark-mode .header__hamburger-line {
+  background-color: var(--color-text-primary);
+}
+
+.dark-mode .header__mobile-menu.active {
+  border-top-color: var(--color-border);
+}
+
+.dark-mode .header__mobile-link {
+  color: var(--color-text-secondary);
+}
+
+.dark-mode .header__mobile-link:hover {
+  background-color: var(--color-bg-secondary);
+  color: #10B981;
 }

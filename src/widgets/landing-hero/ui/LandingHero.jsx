@@ -1,8 +1,10 @@
 import { Button } from '@/shared/ui/components';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import './LandingHero.css';
 
 export const LandingHero = () => {
+  const { t } = useTranslation();
   return (
     <section className="hero" id="inicio">
       <div className="container">
@@ -16,16 +18,16 @@ export const LandingHero = () => {
                   fill="currentColor"
                 />
               </svg>
-              Sistema de Evaluación
+              {t('landing.hero.badge')}
             </span>
 
             <h1 className="hero__title">
-              Evalúa y mejora la{' '}
-              <span className="hero__title--highlight">calidad educativa</span>
+              {t('landing.hero.title1')}{' '}
+              <span className="hero__title--highlight">{t('landing.hero.title2')}</span>
             </h1>
 
             <p className="hero__description">
-              Plataforma diseñada para optimizar y transparentar la evaluación docente
+              {t('landing.hero.description')}
             </p>
 
             <div className="hero__actions">
@@ -42,7 +44,7 @@ export const LandingHero = () => {
       </svg>
     }
   >
-    Comenzar evaluación
+    {t('landing.hero.btnStart')}
   </Button>
 </Link>
 
@@ -56,7 +58,7 @@ export const LandingHero = () => {
                   </svg>
                 }
               >
-                Más información
+                {t('landing.hero.btnInfo')}
               </Button>
             </div>
           </div>

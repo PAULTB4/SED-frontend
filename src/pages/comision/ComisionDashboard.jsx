@@ -1,9 +1,11 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useComisionData } from '../../features/evaluacion-comision';
 import { StatCard } from '../../shared/ui/components';
 import './ComisionDashboard.css';
 
 export const ComisionDashboard = () => {
+  const { t } = useTranslation();
   const { data, loading, error } = useComisionData();
   const [showBanner, setShowBanner] = useState(true);
 
@@ -12,7 +14,7 @@ export const ComisionDashboard = () => {
       <div className="comision-dashboard">
         <div className="loading-state">
           <div className="spinner"></div>
-          <p>Cargando datos...</p>
+          <p>{t('common.loading')}</p>
         </div>
       </div>
     );
@@ -44,8 +46,8 @@ export const ComisionDashboard = () => {
               </svg>
             </div>
             <div className="banner-text">
-              <h3>Panel de Administración - Comisión de Evaluación Docente</h3>
-              <p>Gestiona períodos de evaluación, configura encuestas y genera reportes del sistema</p>
+              <h3>{t('comision.dashboard.bannerTitle')}</h3>
+              <p>{t('comision.dashboard.bannerDesc')}</p>
             </div>
             <button className="banner-close" onClick={() => setShowBanner(false)}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -58,7 +60,7 @@ export const ComisionDashboard = () => {
 
       {/* Funciones principales */}
       <section className="main-functions">
-        <h2>Funciones Principales</h2>
+        <h2>{t('comision.dashboard.mainFunctions')}</h2>
         <div className="functions-grid">
           <div className="function-card">
             <div className="function-icon">
@@ -67,8 +69,8 @@ export const ComisionDashboard = () => {
                 <path d="M16 2v4M8 2v4M3 10h18" />
               </svg>
             </div>
-            <h3>Gestionar Períodos</h3>
-            <p>Crear y administrar períodos de evaluación docente</p>
+            <h3>{t('comision.dashboard.managePeriods')}</h3>
+            <p>{t('comision.dashboard.managePeriodsDesc')}</p>
           </div>
 
           <div className="function-card">
@@ -81,8 +83,8 @@ export const ComisionDashboard = () => {
                 <polyline points="10 9 9 9 8 9" />
               </svg>
             </div>
-            <h3>Configurar Encuestas</h3>
-            <p>Diseñar y editar cuestionarios de evaluación</p>
+            <h3>{t('comision.dashboard.configureSurveys')}</h3>
+            <p>{t('comision.dashboard.configureSurveysDesc')}</p>
           </div>
 
           <div className="function-card">
@@ -93,20 +95,20 @@ export const ComisionDashboard = () => {
                 <line x1="12" y1="15" x2="12" y2="3" />
               </svg>
             </div>
-            <h3>Generar Reportes</h3>
-            <p>Exportar estadísticas y análisis de evaluaciones</p>
+            <h3>{t('comision.dashboard.generateReports')}</h3>
+            <p>{t('comision.dashboard.generateReportsDesc')}</p>
           </div>
         </div>
       </section>
 
       {/* Estadísticas generales */}
       <section className="stats-section">
-        <h2>Estadísticas Generales</h2>
+        <h2>{t('comision.dashboard.generalStats')}</h2>
         <div className="stats-grid">
           <StatCard
-            title="Docentes Evaluados"
+            title={t('comision.dashboard.evaluatedTeachers')}
             value={estadisticas.docentesEvaluados}
-            subtitle="En período actual"
+            subtitle={t('comision.dashboard.currentPeriod')}
             borderColor="#10B981"
             icon={
               <svg viewBox="0 0 24 24" fill="none">
@@ -115,9 +117,9 @@ export const ComisionDashboard = () => {
             }
           />
           <StatCard
-            title="Estudiantes Participantes"
+            title={t('comision.dashboard.participatingStudents')}
             value={estadisticas.estudiantesParticipantes.toLocaleString()}
-            subtitle="Total de respuestas"
+            subtitle={t('comision.dashboard.totalResponses')}
             borderColor="#3B82F6"
             icon={
               <svg viewBox="0 0 24 24" fill="none">
@@ -126,9 +128,9 @@ export const ComisionDashboard = () => {
             }
           />
           <StatCard
-            title="Tasa de Respuesta"
+            title={t('comision.dashboard.responseRate')}
             value={`${estadisticas.tasaRespuesta}%`}
-            subtitle="Promedio general"
+            subtitle={t('comision.dashboard.generalAverage')}
             borderColor="#F59E0B"
             icon={
               <svg viewBox="0 0 24 24" fill="none">
@@ -137,9 +139,9 @@ export const ComisionDashboard = () => {
             }
           />
           <StatCard
-            title="Períodos Activos"
+            title={t('comision.dashboard.activePeriods')}
             value={estadisticas.periodosActivos}
-            subtitle="En ejecución"
+            subtitle={t('comision.dashboard.inProgress')}
             borderColor="#8B5CF6"
             icon={
               <svg viewBox="0 0 24 24" fill="none">
@@ -153,7 +155,7 @@ export const ComisionDashboard = () => {
 
       {/* Accesos rápidos */}
       <section className="quick-access-section">
-        <h2>Accesos Rápidos</h2>
+        <h2>{t('comision.dashboard.quickAccess')}</h2>
         <div className="quick-access-grid">
           <div className="quick-card create-period">
             <div className="quick-icon">
@@ -162,10 +164,10 @@ export const ComisionDashboard = () => {
                 <path d="M12 8v8M8 12h8" />
               </svg>
             </div>
-            <h3>Crear Nuevo Período</h3>
-            <p>Configurar un nuevo período de evaluación docente</p>
+            <h3>{t('comision.dashboard.createPeriod')}</h3>
+            <p>{t('comision.dashboard.createPeriodDesc')}</p>
             <button className="quick-btn">
-              <span>Crear Período</span>
+              <span>{t('comision.dashboard.createPeriod')}</span>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>
@@ -179,10 +181,10 @@ export const ComisionDashboard = () => {
                 <path d="M18 17V9M13 17v-6M8 17v-3" />
               </svg>
             </div>
-            <h3>Ver Reportes</h3>
-            <p>Acceder a estadísticas y análisis detallados</p>
+            <h3>{t('comision.dashboard.viewReports')}</h3>
+            <p>{t('comision.dashboard.viewReportsDesc')}</p>
             <button className="quick-btn">
-              <span>Ver Reportes</span>
+              <span>{t('comision.dashboard.viewReports')}</span>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>
@@ -196,10 +198,10 @@ export const ComisionDashboard = () => {
                 <rect x="9" y="3" width="6" height="4" rx="1" />
               </svg>
             </div>
-            <h3>Gestionar Encuestas</h3>
-            <p>Configurar y editar cuestionarios de evaluación</p>
+            <h3>{t('comision.dashboard.manageSurveys')}</h3>
+            <p>{t('comision.dashboard.manageSurveysDesc')}</p>
             <button className="quick-btn">
-              <span>Gestionar</span>
+              <span>{t('comision.dashboard.manage')}</span>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>
@@ -212,7 +214,7 @@ export const ComisionDashboard = () => {
       {periodosActivos.length > 0 && (
         <section className="active-periods-section">
           <div className="section-header">
-            <h2>Períodos Activos</h2>
+            <h2>{t('comision.dashboard.activePeriods')}</h2>
             <span className="badge-count">{periodosActivos.length}</span>
           </div>
           <div className="periods-list">
@@ -226,7 +228,7 @@ export const ComisionDashboard = () => {
                 </div>
                 <div className="period-progress">
                   <div className="progress-stats">
-                    <span>{periodo.docentesEvaluados}/{periodo.totalDocentes} docentes</span>
+                    <span>{periodo.docentesEvaluados}/{periodo.totalDocentes} {t('comision.dashboard.teachers')}</span>
                     <span className="progress-value">{periodo.progreso}%</span>
                   </div>
                   <div className="progress-bar">

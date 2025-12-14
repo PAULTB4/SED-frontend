@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { StatCard, Avatar } from '@/shared/ui/components';
 import { useEstudianteData } from '@/features/evaluacion-estudiante';
 import './EstudianteDashboard.css';
@@ -8,6 +9,7 @@ import './EstudianteDashboard.css';
  * Muestra estadísticas y cursos actuales para evaluar
  */
 export const EstudianteDashboard = () => {
+  const { t } = useTranslation();
   const { data, loading, error } = useEstudianteData();
   const navigate = useNavigate();
 
@@ -15,7 +17,7 @@ export const EstudianteDashboard = () => {
     return (
       <div className="estudiante-dashboard__loading">
         <div className="estudiante-dashboard__spinner"></div>
-        <p>Cargando datos...</p>
+        <p>{t('common.loading')}</p>
       </div>
     );
   }
@@ -42,7 +44,7 @@ export const EstudianteDashboard = () => {
           <Avatar src={estudiante.avatar} alt={estudiante.nombre} size="lg" fallback="MG" />
           <div className="estudiante-dashboard__welcome-text">
             <h1 className="estudiante-dashboard__title">
-              ¡Bienvenido, {estudiante.nombre}!
+              {t('estudiante.dashboard.welcome', { nombre: estudiante.nombre })}
             </h1>
             <p className="estudiante-dashboard__subtitle">
               {estudiante.carrera}
@@ -54,7 +56,7 @@ export const EstudianteDashboard = () => {
       {/* Stats Cards */}
       <div className="estudiante-dashboard__stats">
         <StatCard
-          title="Evaluaciones Pendientes"
+          title={t('estudiante.dashboard.pending')}
           value={estadisticas.pendientes}
           color="yellow"
           icon={
@@ -66,7 +68,7 @@ export const EstudianteDashboard = () => {
         />
         
         <StatCard
-          title="Evaluaciones Completadas"
+          title={t('estudiante.dashboard.completed')}
           value={estadisticas.completadas}
           color="green"
           icon={
@@ -80,30 +82,30 @@ export const EstudianteDashboard = () => {
 
       {/* Mis Cursos Actuales */}
       <div className="estudiante-dashboard__section">
-        <h2 className="estudiante-dashboard__section-title">Mis Cursos Actuales</h2>
+        <h2 className="estudiante-dashboard__section-title">{t('estudiante.dashboard.myCourses')}</h2>
         <div className="estudiante-dashboard__courses">
           {cursosActuales.map((curso) => (
             <div key={curso.id} className="estudiante-dashboard__course-card">
               <div className="estudiante-dashboard__course-header">
                 <span className="estudiante-dashboard__course-code">{curso.codigo}</span>
                 {curso.evaluado && (
-                  <span className="estudiante-dashboard__badge-evaluado">Evaluado</span>
+                  <span className="estudiante-dashboard__badge-evaluado">{t('estudiante.dashboard.evaluated')}</span>
                 )}
               </div>
               
               <h3 className="estudiante-dashboard__course-title">{curso.nombre}</h3>
-              <p className="estudiante-dashboard__course-teacher">Docente: {curso.docente}</p>
+              <p className="estudiante-dashboard__course-teacher">{t('estudiante.dashboard.teacher')}: {curso.docente}</p>
               
               {curso.evaluado ? (
                 <button className="estudiante-dashboard__btn estudiante-dashboard__btn--disabled" disabled>
-                  Ya Evaluado
+                  {t('estudiante.dashboard.alreadyEvaluated')}
                 </button>
               ) : (
                 <button 
                   className="estudiante-dashboard__btn estudiante-dashboard__btn--primary"
                   onClick={() => handleEvaluar(curso.id)}
                 >
-                  Evaluar
+                  {t('estudiante.dashboard.evaluate')}
                 </button>
               )}
             </div>

@@ -116,3 +116,35 @@
   color: var(--color-text-primary);
   line-height: 1.7;
 }
+
+/* Dark Mode */
+.dark-mode .vision {
+  background-color: var(--color-bg-secondary);
+}
+
+.dark-mode .vision__badge {
+  background-color: rgba(16, 185, 129, 0.1);
+  color: #10B981;
+}
+
+.dark-mode .vision__title {
+  color: var(--color-text-primary);
+}
+
+.dark-mode .vision__card--vision {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(16, 185, 129, 0.1) 100%);
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.dark-mode .vision__card--mission {
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.2) 0%, rgba(245, 158, 11, 0.1) 100%);
+  border-color: rgba(251, 191, 36, 0.3);
+}
+
+.dark-mode .vision__card-title {
+  color: var(--color-text-primary);
+}
+
+.dark-mode .vision__card-description {
+  color: var(--color-text-secondary);
+}

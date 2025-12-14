@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { Button } from '@/shared/ui/components';
 import './DocenteRecomendaciones.css';
 
@@ -6,42 +7,44 @@ import './DocenteRecomendaciones.css';
  * Muestra sugerencias de mejora basadas en evaluaciones
  */
 export const DocenteRecomendaciones = () => {
+  const { t } = useTranslation();
+  
   // Datos mock de recomendaciones
   const recomendaciones = [
     {
       id: 1,
-      categoria: 'Metodología de enseñanza',
+      categoria: t('docente.recommendations.methodology'),
       calificacionActual: 3.2,
       severidad: 'high',
-      descripcion: 'Considera diversificar los métodos de enseñanza incorporando más actividades prácticas y trabajo en equipo. Los estudiantes han expresado interés en proyectos colaborativos.',
+      descripcion: t('docente.recommendations.methodologyDesc'),
       acciones: [
-        'Implementar proyectos grupales pequeños',
-        'Incorporar estudios de caso reales',
-        'Utilizar metodologías activas como aprendizaje basado en problemas'
+        t('docente.recommendations.methodologyAction1'),
+        t('docente.recommendations.methodologyAction2'),
+        t('docente.recommendations.methodologyAction3')
       ]
     },
     {
       id: 2,
-      categoria: 'Uso de tecnología',
+      categoria: t('docente.recommendations.technology'),
       calificacionActual: 3.8,
       severidad: 'medium',
-      descripcion: 'Los estudiantes sugieren más uso de recursos digitales y herramientas interactivas en clase. Esto podría mejorar el engagement y facilitar el aprendizaje.',
+      descripcion: t('docente.recommendations.technologyDesc'),
       acciones: [
-        'Explorar plataformas de aprendizaje interactivo',
-        'Crear contenido multimedia complementario',
-        'Utilizar herramientas de colaboración en línea'
+        t('docente.recommendations.technologyAction1'),
+        t('docente.recommendations.technologyAction2'),
+        t('docente.recommendations.technologyAction3')
       ]
     },
     {
       id: 3,
-      categoria: 'Disponibilidad',
+      categoria: t('docente.recommendations.availability'),
       calificacionActual: 4.5,
       severidad: 'low',
-      descripcion: 'Tu disponibilidad para consultas es valorada positivamente. Mantén estos buenos hábitos de comunicación con los estudiantes.',
+      descripcion: t('docente.recommendations.availabilityDesc'),
       acciones: [
-        'Continuar con horarios de consulta regulares',
-        'Mantener respuesta rápida a correos',
-        'Considerar sesiones de tutoría grupal'
+        t('docente.recommendations.availabilityAction1'),
+        t('docente.recommendations.availabilityAction2'),
+        t('docente.recommendations.availabilityAction3')
       ]
     }
   ];
@@ -62,11 +65,11 @@ export const DocenteRecomendaciones = () => {
   const getSeverityLabel = (severidad) => {
     switch (severidad) {
       case 'high':
-        return 'Alta Prioridad';
+        return t('docente.recommendations.highPriority');
       case 'medium':
-        return 'Prioridad Media';
+        return t('docente.recommendations.mediumPriority');
       case 'low':
-        return 'Buen Nivel';
+        return t('docente.recommendations.goodLevel');
       default:
         return '';
     }
@@ -82,16 +85,16 @@ export const DocenteRecomendaciones = () => {
           </div>
           <div className="docente-recomendaciones__header-text">
             <h1 className="docente-recomendaciones__title">
-              Recomendaciones para Mejora
+              {t('docente.recommendations.title')}
             </h1>
             <p className="docente-recomendaciones__subtitle">
-              Basado en las evaluaciones recibidas, aquí encontrarás sugerencias para potenciar tu desempeño docente y áreas donde ya destacas.
+              {t('docente.recommendations.subtitle')}
             </p>
           </div>
         </div>
 
         <div className="docente-recomendaciones__section-header">
-          <h2 className="docente-recomendaciones__section-title">Áreas de Oportunidad</h2>
+          <h2 className="docente-recomendaciones__section-title">{t('docente.recommendations.opportunityAreas')}</h2>
         </div>
 
         <div className="docente-recomendaciones__list">
@@ -130,7 +133,7 @@ export const DocenteRecomendaciones = () => {
                   </span>
                 </div>
                 <div className="docente-recomendaciones__rating">
-                  <span className="docente-recomendaciones__rating-label">Calificación actual:</span>
+                  <span className="docente-recomendaciones__rating-label">{t('docente.recommendations.currentRating')}:</span>
                   <span className="docente-recomendaciones__rating-value">
                     {rec.calificacionActual}/5
                   </span>
@@ -143,7 +146,7 @@ export const DocenteRecomendaciones = () => {
 
               <div className="docente-recomendaciones__actions-section">
                 <h4 className="docente-recomendaciones__actions-title">
-                  Acciones sugeridas:
+                  {t('docente.recommendations.suggestedActions')}:
                 </h4>
                 <ul className="docente-recomendaciones__actions-list">
                   {rec.acciones.map((accion, index) => (
@@ -159,7 +162,7 @@ export const DocenteRecomendaciones = () => {
 
               <div className="docente-recomendaciones__card-footer">
                 <Button variant="outline" size="sm">
-                  Ver detalles
+                  {t('docente.recommendations.viewDetails')}
                 </Button>
               </div>
             </div>

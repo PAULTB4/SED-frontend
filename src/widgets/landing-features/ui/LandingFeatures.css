@@ -100,3 +100,38 @@
   color: var(--color-text-secondary);
   line-height: 1.6;
 }
+
+/* Dark Mode */
+.dark-mode .features {
+  background-color: var(--color-bg-dark);
+}
+
+.dark-mode .features__badge {
+  background-color: rgba(16, 185, 129, 0.1);
+  color: #10B981;
+}
+
+.dark-mode .features__title {
+  color: var(--color-text-primary);
+}
+
+.dark-mode .features__description {
+  color: var(--color-text-secondary);
+}
+
+.dark-mode .features__card {
+  background-color: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+}
+
+.dark-mode .features__card-icon {
+  background-color: rgba(16, 185, 129, 0.1);
+}
+
+.dark-mode .features__card-title {
+  color: var(--color-text-primary);
+}
+
+.dark-mode .features__card-description {
+  color: var(--color-text-secondary);
+}

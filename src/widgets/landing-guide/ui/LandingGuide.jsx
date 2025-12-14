@@ -1,33 +1,36 @@
 import { Button, Card } from '@/shared/ui/components';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import './LandingGuide.css';
 
 export const LandingGuide = () => {
+  const { t } = useTranslation();
+  
   const steps = [
     {
       id: 1,
-      title: 'Accede a la plataforma',
-      description: 'Visita sed.pautb.com desde cualquier navegador.'
+      title: t('landing.guide.step1Title'),
+      description: t('landing.guide.step1Desc')
     },
     {
       id: 2,
-      title: 'Inicia sesión',
-      description: 'Utiliza tu correo institucional y contraseña para acceder.'
+      title: t('landing.guide.step2Title'),
+      description: t('landing.guide.step2Desc')
     },
     {
       id: 3,
-      title: 'Selecciona el curso y docente',
-      description: 'Elige el curso y docente que deseas evaluar de tu lista de asignaturas.'
+      title: t('landing.guide.step3Title'),
+      description: t('landing.guide.step3Desc')
     },
     {
       id: 4,
-      title: 'Completa la evaluación',
-      description: 'Valora con estrellas los diferentes criterios y añade comentarios si lo deseas.'
+      title: t('landing.guide.step4Title'),
+      description: t('landing.guide.step4Desc')
     },
     {
       id: 5,
-      title: 'Envía tu evaluación',
-      description: 'Revisa tus respuestas y haz clic en "Enviar" para completar el proceso.'
+      title: t('landing.guide.step5Title'),
+      description: t('landing.guide.step5Desc')
     }
   ];
 
@@ -43,11 +46,11 @@ export const LandingGuide = () => {
                 strokeWidth="2"
               />
             </svg>
-            Guía
+            {t('landing.guide.badge')}
           </span>
-          <h2 className="guide__title">¿Cómo ingresar y evaluar?</h2>
+          <h2 className="guide__title">{t('landing.guide.title')}</h2>
           <p className="guide__description">
-            Sigue estos sencillos pasos para realizar tus evaluaciones docentes
+            {t('landing.guide.description')}
           </p>
         </div>
 
@@ -62,7 +65,7 @@ export const LandingGuide = () => {
                   strokeWidth="2"
                 />
               </svg>
-              <h3>Pasos a seguir</h3>
+              <h3>{t('landing.guide.stepsTitle')}</h3>
             </div>
 
             <ol className="guide__steps-list">
@@ -95,10 +98,9 @@ export const LandingGuide = () => {
                 </svg>
               </div>
               <div className="guide__callout-content">
-                <h4 className="guide__callout-title">100% Anónimo y Seguro</h4>
+                <h4 className="guide__callout-title">{t('landing.guide.callout1Title')}</h4>
                 <p className="guide__callout-description">
-                  Tus evaluaciones son totalmente anónimas. Ni los docentes ni las autoridades 
-                  podrán saber quién realizó cada evaluación, garantizando sinceridad y protección.
+                  {t('landing.guide.callout1Desc')}
                 </p>
               </div>
             </Card>
@@ -117,10 +119,9 @@ export const LandingGuide = () => {
                 </svg>
               </div>
               <div className="guide__callout-content">
-                <h4 className="guide__callout-title">Mejora la calidad educativa</h4>
+                <h4 className="guide__callout-title">{t('landing.guide.callout2Title')}</h4>
                 <p className="guide__callout-description">
-                  Tu participación es crucial para mejorar la calidad de la enseñanza. Cada 
-                  evaluación ayuda a identificar fortalezas y áreas de mejora de los docentes.
+                  {t('landing.guide.callout2Desc')}
                 </p>
               </div>
             </Card>
@@ -142,7 +143,7 @@ export const LandingGuide = () => {
         </svg>
       }
     >
-      Comenzar ahora
+      {t('landing.guide.btnStart')}
     </Button>
   </Link>
 </div>

@@ -190,11 +190,11 @@ La aplicación estará disponible en: `http://localhost:5173`
 - **Períodos**: `http://localhost:5173/comision/periodos`
 - **Reportes**: `http://localhost:5173/comision/reportes`
 
-#### 🎓 Módulo Estudiante (Pendiente)
-- Será desarrollado por el equipo backend
-
-#### 📝 Módulo Evaluación (Pendiente)
-- Será desarrollado por el equipo backend
+#### 🎓 Módulo Estudiante (Completado - v3)
+- **Dashboard**: `http://localhost:5173/estudiante/dashboard`
+- **Mi Perfil**: `http://localhost:5173/estudiante/perfil`
+- **Evaluar Docentes**: `http://localhost:5173/estudiante/evaluar-docentes`
+- **Explorar Docentes**: `http://localhost:5173/estudiante/explorar`
 
 > **Nota**: Actualmente todas las vistas funcionan con datos mock. Ver sección de **Integración con Backend** para más detalles.
 
@@ -263,19 +263,19 @@ La aplicación estará disponible en: `http://localhost:5173`
 - `src/shared/ui/layouts/ComisionLayout/` - Layout con navbar y navegación
 - `src/shared/ui/components/PieChart/` - Nuevo componente para gráficos circulares
 
-### ⏳ Módulo de Estudiantes (Pendiente)
-- [ ] Calificar docentes con estrellas (1-5)
-- [ ] Dejar comentarios anónimos
-- [ ] Ver historial de evaluaciones propias
-- [ ] Consultar evaluaciones de otros
-- [ ] Filtrar por facultad, escuela, curso
-- [ ] Guardar evaluación como borrador
+### ✅ Módulo de Estudiantes (Completado - v3)
+- [x] **Dashboard**: Cursos matriculados, evaluaciones pendientes/completadas
+- [x] **Mi Perfil**: Información personal, cursos actuales, historial académico
+- [x] **Evaluar Docentes**: Formulario con 4 secciones (8 criterios), comentarios adicionales
+- [x] **Explorar Docentes**: Búsqueda, filtros (departamento, rating), vista de perfiles
+- [x] **Sistema de Evaluación**: Calificación por estrellas (1-5), comentarios anónimos
+- [x] **Modo Oscuro**: Toggle persistente en todas las vistas
+- [x] **Componentes reutilizables**: Aprovecha StatCard, CourseCard, StarRating
 
-### ⏳ Módulo de Evaluación (Pendiente)
-- [ ] Sistema de evaluación anónima
-- [ ] Formulario dinámico de evaluación
-- [ ] Validación y guardado de respuestas
-- [ ] Vista previa antes de enviar
+**Archivos importantes:**
+- `src/pages/estudiante/` - Todas las páginas del módulo
+- `src/features/evaluacion-estudiante/hooks/useEstudianteData.js` - Hook con datos mock
+- `src/shared/ui/layouts/EstudianteLayout/` - Layout con navbar y menú hamburguesa
 
 ---
 
@@ -475,10 +475,10 @@ npm run test:watch
 **Team Zentry**
 
 - **Tarazona Benancio Paul Marco** - Project Manager / Developer
-- **-** - Backend / Developer
-- **-** - Backend / Developer
-- **-** - Frontend / Developer
-- **-** - Documentation / Design
+- **Josué Sebastián Oriundo Tafur** - Frontend Lead / Developer
+- **Sergio Andres Henriquez Moya** - Frontend Developer (Módulo Estudiante)
+- **-** - Backend Developer
+- **-** - Backend Developer
 
 ---
 

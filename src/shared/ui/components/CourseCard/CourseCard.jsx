@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { StarRating } from '../StarRating';
 import { Button } from '../Button';
 import './CourseCard.css';
@@ -19,6 +20,8 @@ export const CourseCard = ({
   promedio,
   onVerEvaluaciones
 }) => {
+  const { t } = useTranslation();
+  
   return (
     <div className="course-card">
       <div className="course-card__header">
@@ -33,11 +36,11 @@ export const CourseCard = ({
 
       <div className="course-card__stats">
         <div className="course-card__stat">
-          <span className="course-card__stat-label">Estudiantes:</span>
+          <span className="course-card__stat-label">{t('docente.dashboard.students')}:</span>
           <span className="course-card__stat-value">{estudiantes}</span>
         </div>
         <div className="course-card__stat">
-          <span className="course-card__stat-label">Evaluaciones:</span>
+          <span className="course-card__stat-label">{t('docente.dashboard.evaluations')}:</span>
           <span className="course-card__stat-value">{evaluaciones}</span>
         </div>
       </div>
@@ -47,7 +50,7 @@ export const CourseCard = ({
         fullWidth
         onClick={onVerEvaluaciones}
       >
-        Ver evaluaciones
+        {t('common.viewEvaluations')}
       </Button>
     </div>
   );

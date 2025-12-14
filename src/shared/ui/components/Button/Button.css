@@ -78,3 +78,16 @@
   display: flex;
   align-items: center;
 }
+
+/* Dark Mode */
+.dark-mode .btn--secondary {
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+  border-color: var(--color-border);
+}
+
+.dark-mode .btn--secondary:hover:not(:disabled) {
+  background-color: var(--color-bg-primary);
+  border-color: #10B981;
+  color: #10B981;
+}

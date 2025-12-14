@@ -35,7 +35,7 @@
 .login-form__label {
   font-size: var(--font-size-sm);
   font-weight: 600;
-  color: var(--color-text-primary);
+  color: #111827;
 }
 
 /* Input wrapper */
@@ -48,7 +48,7 @@
 .login-form__input-icon {
   position: absolute;
   left: var(--spacing-4);
-  color: var(--color-text-secondary);
+  color: #6B7280;
   pointer-events: none;
 }
 
@@ -57,9 +57,9 @@
   padding: var(--spacing-3) var(--spacing-4);
   padding-left: var(--spacing-12);
   font-size: var(--font-size-base);
-  color: var(--color-text-primary);
-  background-color: var(--color-bg-secondary);
-  border: 2px solid var(--color-border);
+  color: #111827;
+  background-color: #F9FAFB;
+  border: 2px solid #E5E7EB;
   border-radius: var(--radius-lg);
   transition: all var(--transition-base);
   outline: none;
@@ -67,12 +67,12 @@
 
 .login-form__input:focus {
   background-color: white;
-  border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px var(--color-primary-light);
+  border-color: #10B981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
 }
 
 .login-form__input::placeholder {
-  color: var(--color-text-light);
+  color: #9CA3AF;
 }
 
 .login-form__input:disabled {
@@ -96,7 +96,7 @@
   right: var(--spacing-4);
   background: none;
   border: none;
-  color: var(--color-text-secondary);
+  color: #6B7280;
   cursor: pointer;
   padding: var(--spacing-1);
   display: flex;
@@ -105,7 +105,7 @@
 }
 
 .login-form__toggle-password:hover {
-  color: var(--color-primary);
+  color: #10B981;
 }
 
 /* Error message */
@@ -130,7 +130,7 @@
   align-items: center;
   gap: var(--spacing-2);
   font-size: var(--font-size-sm);
-  color: var(--color-text-secondary);
+  color: #374151;
   cursor: pointer;
   user-select: none;
 }
@@ -139,28 +139,28 @@
   width: 18px;
   height: 18px;
   cursor: pointer;
-  accent-color: var(--color-primary);
+  accent-color: #10B981;
 }
 
 .login-form__link {
   font-size: var(--font-size-sm);
-  color: var(--color-text-secondary);
+  color: #6B7280;
   font-weight: 500;
   transition: color var(--transition-base);
 }
 
 .login-form__link:hover {
-  color: var(--color-primary);
+  color: #10B981;
   text-decoration: underline;
 }
 
 .login-form__link--primary {
-  color: var(--color-primary);
+  color: #10B981;
   font-weight: 600;
 }
 
 .login-form__link--primary:hover {
-  color: var(--color-primary-dark);
+  color: #059669;
 }
 
 /* Spinner */
@@ -195,7 +195,7 @@
 .login-form__divider span {
   padding: 0 var(--spacing-4);
   font-size: var(--font-size-sm);
-  color: var(--color-text-secondary);
+  color: #6B7280;
   font-weight: 500;
 }
 

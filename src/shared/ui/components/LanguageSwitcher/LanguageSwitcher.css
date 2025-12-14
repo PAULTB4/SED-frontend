@@ -1,0 +1,112 @@
+.language-switcher {
+  position: relative;
+}
+
+.language-switcher__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: none;
+  color: #6B7280;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.language-switcher__button:hover {
+  background: #D1FAE5;
+  color: #10B981;
+}
+
+.language-switcher__dropdown {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  min-width: 180px;
+  background: white;
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  padding: 0.5rem;
+  z-index: 1000;
+  animation: dropdownSlide 0.2s ease;
+}
+
+@keyframes dropdownSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.language-switcher__item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: #374151;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.language-switcher__item:hover {
+  background: #F3F4F6;
+}
+
+.language-switcher__item--active {
+  background: #D1FAE5;
+  color: #10B981;
+}
+
+.language-switcher__flag {
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.language-switcher__name {
+  flex: 1;
+}
+
+/* Dark Mode */
+.dark-mode .language-switcher__button {
+  color: var(--color-text-secondary);
+}
+
+.dark-mode .language-switcher__button:hover {
+  background: var(--color-bg-secondary);
+  color: #10B981;
+}
+
+.dark-mode .language-switcher__dropdown {
+  background: var(--color-bg-secondary);
+  border-color: var(--color-border);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .language-switcher__item {
+  color: var(--color-text-secondary);
+}
+
+.dark-mode .language-switcher__item:hover {
+  background: var(--color-bg-dark);
+  color: var(--color-text-primary);
+}
+
+.dark-mode .language-switcher__item--active {
+  background: rgba(16, 185, 129, 0.1);
+  color: #10B981;
+}

@@ -6,7 +6,7 @@
 
 /* Header */
 .estudiante-dashboard__header {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--color-bg-primary);
   border-radius: 12px;
   padding: 2rem;
   box-shadow: var(--shadow-sm);
@@ -27,13 +27,13 @@
 .estudiante-dashboard__title {
   font-size: 1.75rem;
   font-weight: 700;
-  color: white;
+  color: #111827;
   margin: 0;
 }
 
 .estudiante-dashboard__subtitle {
   font-size: 1rem;
-  color: rgba(255, 255, 255, 0.9);
+  color: #6B7280;
   margin: 0;
 }
 
@@ -68,15 +68,15 @@
 /* Course Card */
 .estudiante-dashboard__course-card {
   background: var(--color-bg-primary);
-  border: 1px solid #E5E7EB;
+  border: 1px solid var(--color-border);
   border-radius: 12px;
   padding: 1.5rem;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 
 .estudiante-dashboard__course-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 .estudiante-dashboard__course-header {
@@ -87,33 +87,33 @@
 }
 
 .estudiante-dashboard__course-code {
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   font-weight: 600;
   color: #10B981;
   background: rgba(16, 185, 129, 0.1);
-  padding: 0.25rem 0.75rem;
-  border-radius: 6px;
+  padding: 0.25rem 0.625rem;
+  border-radius: 4px;
 }
 
 .estudiante-dashboard__badge-evaluado {
   font-size: 0.75rem;
   font-weight: 600;
-  color: #22c55e;
-  background: rgba(34, 197, 94, 0.1);
-  padding: 0.25rem 0.75rem;
-  border-radius: 6px;
+  color: #10B981;
+  background: rgba(16, 185, 129, 0.1);
+  padding: 0.25rem 0.625rem;
+  border-radius: 4px;
 }
 
 .estudiante-dashboard__course-title {
   font-size: 1.125rem;
   font-weight: 600;
   margin: 0 0 0.5rem;
-  color: #111827;
+  color: var(--color-text-primary);
 }
 
 .estudiante-dashboard__course-teacher {
   font-size: 0.875rem;
-  color: #6B7280;
+  color: var(--color-text-secondary);
   margin: 0 0 1.5rem;
 }
 
@@ -187,6 +187,14 @@
 }
 
 /* Modo Oscuro */
+.dark-mode .estudiante-dashboard__title {
+  color: var(--color-text-primary);
+}
+
+.dark-mode .estudiante-dashboard__subtitle {
+  color: var(--color-text-secondary);
+}
+
 .dark-mode .estudiante-dashboard__section-title {
   color: var(--color-text-primary);
 }

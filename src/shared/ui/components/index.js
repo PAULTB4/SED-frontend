@@ -8,4 +8,5 @@ export { Avatar } from './Avatar';
 export { CourseCard } from './CourseCard';
 export { BarChart } from './BarChart';
 export { LineChart } from './LineChart';
+export { LanguageSwitcher } from './LanguageSwitcher';
 export { PieChart } from './PieChart';

@@ -226,3 +226,74 @@
   justify-content: center;
   margin-top: var(--spacing-12);
 }
+
+/* Dark Mode */
+.dark-mode .guide {
+  background-color: var(--color-bg-dark);
+}
+
+.dark-mode .guide__badge {
+  background-color: rgba(16, 185, 129, 0.1);
+  color: #10B981;
+}
+
+.dark-mode .guide__title {
+  color: var(--color-text-primary);
+}
+
+.dark-mode .guide__description {
+  color: var(--color-text-secondary);
+}
+
+.dark-mode .guide__steps-header {
+  background-color: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+}
+
+.dark-mode .guide__steps-header h3 {
+  color: var(--color-text-primary);
+}
+
+.dark-mode .guide__step {
+  background-color: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+}
+
+.dark-mode .guide__step-number {
+  background-color: rgba(16, 185, 129, 0.1);
+}
+
+.dark-mode .guide__step-title {
+  color: var(--color-text-primary);
+}
+
+.dark-mode .guide__step-description {
+  color: var(--color-text-secondary);
+}
+
+.dark-mode .guide__callout--primary {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.3) 0%, rgba(5, 150, 105, 0.3) 100%);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+}
+
+.dark-mode .guide__callout--secondary {
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.3) 0%, rgba(245, 158, 11, 0.3) 100%);
+  border: 1px solid rgba(251, 191, 36, 0.4);
+  color: var(--color-text-primary);
+}
+
+.dark-mode .guide__callout--primary .guide__callout-title {
+  color: #10B981;
+}
+
+.dark-mode .guide__callout--primary .guide__callout-description {
+  color: var(--color-text-secondary);
+}
+
+.dark-mode .guide__callout--secondary .guide__callout-title {
+  color: #FBBF24;
+}
+
+.dark-mode .guide__callout--secondary .guide__callout-description {
+  color: var(--color-text-secondary);
+}
