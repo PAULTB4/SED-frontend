@@ -150,7 +150,7 @@ cd sed-frontend
 
 2. **Cambiar a la rama de desarrollo**
 ```bash
-git checkout v1
+git checkout v3
 ```
 
 3. **Instalar dependencias**
