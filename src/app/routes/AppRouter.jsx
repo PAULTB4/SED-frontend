@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { LandingPage } from '@/pages/landing';
-import { LoginPage } from '@/pages/auth';
+import { LoginPage, RegisterPage, ForgotPasswordPage } from '@/pages/auth';
 import { 
   EstudianteDashboard, 
   EstudiantePerfil, 
@@ -17,8 +17,14 @@ import {
   ComisionDashboard, 
   ComisionProfile, 
   ComisionPeriodos, 
-  ComisionReportes 
+  ComisionReportes,
+  ComisionCrearPeriodo,
+  ComisionPeriodoDetalle,
+  ComisionPeriodoEditar,
+  ComisionEvaluaciones,
+  ComisionCrearEvaluacion
 } from '@/pages/comision';
+import { RegisterCoursesPage } from '@/pages/auth';
 import { EstudianteLayout, DocenteLayout, ComisionLayout } from '@/shared/ui/layouts';
 
 export const AppRouter = () => {
@@ -26,9 +32,11 @@ export const AppRouter = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<LandingPage />} />
-         <Route path="/login" element={<LoginPage />} />
-         {/* Rutas futuras */}
-        {/* <Route path="/register" element={<RegisterPage />} /> */}
+        <Route path="/login" element={<LoginPage />} />
+        {/* Rutas futuras */}
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/register/cursos" element={<RegisterCoursesPage />} />
+        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         {/* <Route path="/forgot-password" element={<ForgotPasswordPage />} /> */}
         
         {/* Rutas protegidas por rol */}
@@ -56,6 +64,12 @@ export const AppRouter = () => {
           <Route path="dashboard" element={<ComisionDashboard />} />
           <Route path="perfil" element={<ComisionProfile />} />
           <Route path="periodos" element={<ComisionPeriodos />} />
+          <Route path="periodos/crear" element={<ComisionCrearPeriodo />} />
+          <Route path="periodos/:id" element={<ComisionPeriodoDetalle />} />
+          <Route path="periodos/:id/editar" element={<ComisionPeriodoEditar />} />
+          <Route path="periodos/:id/evaluaciones" element={<ComisionEvaluaciones />} />
+          <Route path="periodos/:id/evaluacion/:instrumentoId" element={<ComisionCrearEvaluacion />} />
+          <Route path="periodos/:id/evaluacion/nueva" element={<ComisionCrearEvaluacion />} />
           <Route path="reportes" element={<ComisionReportes />} />
         </Route>
         

@@ -1,136 +1,128 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { cursosEstudianteApi } from '../api/cursosEstudianteApi';
+import { periodosApi } from '@/features/evaluacion-comision/api/periodosApi';
 
-/**
- * Hook para obtener datos del estudiante
- * NOTA: Este hook usa datos MOCK temporales
- * Cuando se integre con el backend, se reemplazará por llamadas a la API
- */
+const getUserStorage = () => {
+  try {
+    return JSON.parse(localStorage.getItem('user') || '{}');
+  } catch {
+    return {};
+  }
+};
+
 export const useEstudianteData = () => {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
 
+  const user = useMemo(() => getUserStorage(), []);
+  const perfilId =
+    user?.perfilId ||
+    user?.estudianteId ||
+    user?.id_usuario ||
+    user?.usuarioId ||
+    user?.userId ||
+    user?.usuario?.id ||
+    user?.id ||
+    null;
+  const nombre = user?.nombre_completo || user?.nombre || 'Estudiante';
+  const carrera = user?.carrera || user?.facultad || user?.escuela || '';
+  const codigoEstudiante =
+    user?.codigoEstudiante ||
+    user?.codigo_estudiante ||
+    user?.codigoAlumno ||
+    user?.codigo ||
+    user?.username ||
+    '';
+  const semestreActual = user?.semestre || user?.semestreActual || user?.ciclo || '';
+
   useEffect(() => {
-    // Simular carga de datos
     const fetchData = async () => {
+      if (!perfilId) {
+        setError('No se encontró el perfil del estudiante');
+        setLoading(false);
+        return;
+      }
       try {
         setLoading(true);
-        
-        // Simular delay de API
-        await new Promise(resolve => setTimeout(resolve, 500));
-        
-        // Datos MOCK - Se reemplazarán con llamadas reales a la API
-        const mockData = {
-          estudiante: {
-            id: 1,
-            nombre: 'María García',
-            email: 'alumno@test.com',
-            codigo: '20210045',
-            carrera: 'Ingeniería de Sistemas',
-            semestre: 'Sexto Semestre',
-            avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Maria'
-          },
-          estadisticas: {
-            pendientes: 3,
-            completadas: 2
-          },
-          cursosActuales: [
-            {
-              id: 1,
-              codigo: 'CS-101',
-              nombre: 'Introducción a la Programación',
-              docente: 'Dr. Carlos Méndez',
-              evaluado: false
-            },
-            {
-              id: 2,
-              codigo: 'MATH-201',
-              nombre: 'Cálculo Diferencial',
-              docente: 'Dra. Ana Torres',
-              evaluado: false
-            },
-            {
-              id: 3,
-              codigo: 'ENG-102',
-              nombre: 'Inglés Técnico II',
-              docente: 'Prof. Roberto Silva',
-              evaluado: true
-            },
-            {
-              id: 4,
-              codigo: 'PHY-150',
-              nombre: 'Física General',
-              docente: 'Dr. Luis Ramírez',
-              evaluado: false
-            },
-            {
-              id: 5,
-              codigo: 'DB-301',
-              nombre: 'Bases de Datos',
-              docente: 'Dra. Patricia Gómez',
-              evaluado: true
+        // Buscar un periodo que tenga cursos del estudiante (activo primero, luego cualquiera)
+        let periodos = await periodosApi.getActivos();
+        if (!periodos || periodos.length === 0) {
+          periodos = (await periodosApi.getTodos?.()) || [];
+        }
+        if (!periodos || periodos.length === 0) {
+          setError('No hay periodos disponibles');
+          setLoading(false);
+          return;
+        }
+
+        let cursos = [];
+        let periodo = null;
+        for (const p of periodos) {
+          const list = await cursosEstudianteApi.getByPeriodo(perfilId, p.id);
+          if (list && list.length > 0) {
+            cursos = list;
+            periodo = p;
+            break;
+          }
+        }
+        // Si no se encontraron cursos en activos, probar con todos
+        if (!periodo) {
+          for (const p of periodos) {
+            const list = await cursosEstudianteApi.getByPeriodo(perfilId, p.id);
+            if (list && list.length > 0) {
+              cursos = list;
+              periodo = p;
+              break;
             }
-          ],
-          cursosMatriculados: [
-            {
-              id: 1,
-              codigo: 'CS-101',
-              nombre: 'Introducción a la Programación',
-              docente: 'Dr. Carlos Méndez'
-            },
-            {
-              id: 2,
-              codigo: 'MATH-201',
-              nombre: 'Cálculo Diferencial',
-              docente: 'Dra. Ana Torres'
-            },
-            {
-              id: 3,
-              codigo: 'ENG-102',
-              nombre: 'Inglés Técnico II',
-              docente: 'Prof. Roberto Silva'
-            },
-            {
-              id: 4,
-              codigo: 'PHY-150',
-              nombre: 'Física General',
-              docente: 'Dr. Luis Ramírez'
-            }
-          ],
-          evaluacionesRealizadas: [
-            {
-              id: 1,
-              fecha: '2024-11-15',
-              curso: 'ENG-102',
-              nombreCurso: 'Inglés Técnico II',
-              docente: 'Prof. Roberto Silva',
-              calificacion: 5,
-              estado: 'completada'
-            },
-            {
-              id: 2,
-              fecha: '2024-11-10',
-              curso: 'DB-301',
-              nombreCurso: 'Bases de Datos',
-              docente: 'Dra. Patricia Gómez',
-              calificacion: 4,
-              estado: 'completada'
-            }
-          ]
+          }
+        }
+        // Si aun no hay cursos, usar el primer periodo para devolver vacio
+        if (!periodo) {
+          periodo = periodos[0];
+        }
+
+        const mappedCursos = (cursos || []).map((c) => ({
+          id: c.cursoId || c.id,
+          matriculaId: c.matriculaId,
+          seccionId: c.seccionId,
+          instrumentoId: c.instrumentoId,
+          codigo: c.cursoCodigo || c.codigo || '',
+          nombre: c.cursoNombre || c.nombre || '',
+          docente: c.docenteNombre || 'Docente no asignado',
+          evaluado: !!c.evaluado
+        }));
+
+        const stats = {
+          pendientes: mappedCursos.filter((c) => !c.evaluado && c.instrumentoId).length,
+          completadas: mappedCursos.filter((c) => c.evaluado).length
         };
-        
-        setData(mockData);
+
+        setData({
+          estudiante: {
+            id: perfilId,
+            nombre,
+            carrera,
+            codigo: codigoEstudiante,
+            semestre: semestreActual,
+            avatar: null
+          },
+          estadisticas: stats,
+          cursosActuales: mappedCursos,
+          cursosMatriculados: mappedCursos,
+          periodoActual: periodo
+        });
         setError(null);
       } catch (err) {
-        setError('Error al cargar los datos');
-        console.error('Error:', err);
+        console.error('Error cargando datos del estudiante', err);
+        setError(err?.message || 'Error al cargar los datos');
+        setData(null);
       } finally {
         setLoading(false);
       }
     };
-
     fetchData();
-  }, []);
+  }, [perfilId, nombre, carrera]);
 
   return { data, loading, error };
 };

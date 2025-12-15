@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { Avatar } from '@/shared/ui/components';
 import { useDocenteData } from '@/features/evaluaciones-docente';
+import { useState } from 'react';
 import './DocenteProfile.css';
 
 /**
@@ -10,6 +11,8 @@ import './DocenteProfile.css';
 export const DocenteProfile = () => {
   const { t } = useTranslation();
   const { data, loading, error } = useDocenteData();
+  const [avatarPreview, setAvatarPreview] = useState(null);
+  const [savingAvatar, setSavingAvatar] = useState(false);
 
   if (loading) {
     return (
@@ -28,7 +31,42 @@ export const DocenteProfile = () => {
     );
   }
 
+  const storedUser = (() => {
+    try {
+      return JSON.parse(localStorage.getItem('user') || '{}');
+    } catch {
+      return {};
+    }
+  })();
+
   const { docente, estadisticas, cursos } = data;
+
+  const displayDocente = {
+    ...docente,
+    nombre: storedUser.nombre || storedUser.nombreCompleto || docente.nombre,
+    email: storedUser.correo || storedUser.email || docente.email,
+    avatar: avatarPreview || storedUser.avatar || docente.avatar
+  };
+
+  const handleAvatarChange = (e) => {
+    const file = e.target.files?.[0];
+    if (!file || !file.type.startsWith('image/')) return;
+    const reader = new FileReader();
+    setSavingAvatar(true);
+    reader.onload = () => {
+      const base64 = reader.result;
+      setAvatarPreview(base64);
+      try {
+        const user = JSON.parse(localStorage.getItem('user') || '{}');
+        user.avatar = base64;
+        localStorage.setItem('user', JSON.stringify(user));
+      } catch {
+        /* ignore */
+      }
+      setSavingAvatar(false);
+    };
+    reader.readAsDataURL(file);
+  };
 
   return (
     <div className="docente-profile">
@@ -39,18 +77,22 @@ export const DocenteProfile = () => {
           <div className="docente-profile__card">
             <div className="docente-profile__avatar-section">
               <Avatar 
-                src={docente.avatar} 
-                alt={docente.nombre} 
+                src={displayDocente.avatar} 
+                alt={displayDocente.nombre} 
                 size="xl" 
-                fallback="CM" 
+                fallback="U" 
               />
-              <h2 className="docente-profile__name">{docente.nombre}</h2>
+              <h2 className="docente-profile__name">{displayDocente.nombre}</h2>
+              <label className="docente-profile__avatar-upload">
+                <input type="file" accept="image/*" onChange={handleAvatarChange} disabled={savingAvatar} />
+                {savingAvatar ? t('common.saving') : t('docente.profile.changeAvatar', 'Cambiar foto')}
+              </label>
             </div>
 
             <div className="docente-profile__info">
               <div className="docente-profile__info-item">
                 <span className="docente-profile__info-label">{t('docente.profile.email')}</span>
-                <span className="docente-profile__info-value">{docente.email}</span>
+                <span className="docente-profile__info-value">{displayDocente.email}</span>
               </div>
 
               <div className="docente-profile__info-item">

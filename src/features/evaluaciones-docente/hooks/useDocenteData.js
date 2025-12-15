@@ -1,84 +1,94 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState, useMemo } from 'react';
+import { cursosDocenteApi } from '../api/cursosDocenteApi';
+import { periodosApi } from '@/features/evaluacion-comision/api/periodosApi';
 
-/**
- * Hook para obtener datos del docente
- * NOTA: Este hook usa datos MOCK temporales
- * Cuando se integre con el backend, se reemplazará por llamadas a la API
- */
+const getUserStorage = () => {
+  try {
+    return JSON.parse(localStorage.getItem('user') || '{}');
+  } catch {
+    return {};
+  }
+};
+
 export const useDocenteData = () => {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
 
+  const user = useMemo(() => getUserStorage(), []);
+  const perfilId =
+    user?.perfilId ||
+    user?.docenteId ||
+    user?.id_usuario ||
+    user?.usuarioId ||
+    user?.userId ||
+    user?.usuario?.id ||
+    user?.id ||
+    null;
+  const nombre = user?.nombre_completo || user?.nombre || 'Docente';
+  const departamento = user?.departamento || user?.facultad || '';
+
   useEffect(() => {
-    // Simular carga de datos
     const fetchData = async () => {
+      if (!perfilId) {
+        setError('No se encontró el perfil del docente');
+        setLoading(false);
+        return;
+      }
       try {
         setLoading(true);
-        
-        // Simular delay de API
-        await new Promise(resolve => setTimeout(resolve, 500));
-        
-        // Datos MOCK - Se reemplazarán con llamadas reales a la API
-        const mockData = {
+        let periodos = await periodosApi.getActivos();
+        if (!periodos || periodos.length === 0) {
+          periodos = (await periodosApi.getTodos?.()) || [];
+        }
+        const periodo = periodos?.[0];
+        if (!periodo) {
+          setError('No hay periodos disponibles');
+          setLoading(false);
+          return;
+        }
+
+        const cursos = await cursosDocenteApi.getByPeriodo(perfilId, periodo.id);
+        const mappedCursos = (cursos || []).map((c) => ({
+          id: c.cursoId || c.id,
+          codigo: c.cursoCodigo || c.codigo || '',
+          nombre: c.cursoNombre || c.nombre || '',
+          estudiantes: c.estudiantes || 0,
+          evaluaciones: c.evaluaciones || 0,
+          promedio: c.promedio || 0,
+          docenteNombre: c.docenteNombre || nombre
+        }));
+
+        const stats = {
+          totalEvaluaciones: mappedCursos.reduce((acc, cur) => acc + (cur.evaluaciones || 0), 0),
+          promedioGeneral: mappedCursos.length > 0
+            ? (mappedCursos.reduce((acc, cur) => acc + (cur.promedio || 0), 0) / mappedCursos.length).toFixed(1)
+            : 0,
+          tendencia: 0.0,
+          comentariosRecientes: 0
+        };
+
+        setData({
           docente: {
-            id: 1,
-            nombre: 'Dr. Carlos Méndez',
-            email: 'docente@test.com',
-            departamento: 'Departamento de Ingeniería de Sistemas',
-            especialidad: 'Desarrollo de Software',
-            grado: 'Doctor en Ciencias de la Computación',
+            id: perfilId,
+            nombre,
+            departamento,
             avatar: null
           },
-          estadisticas: {
-            totalEvaluaciones: 91,
-            promedioGeneral: 4.8,
-            tendencia: 0.3,
-            comentariosRecientes: 12,
-            anosExperiencia: 15,
-            totalEstudiantes: 1250,
-            calificacionHistorica: 4.8
-          },
-          cursos: [
-            {
-              id: 1,
-              codigo: 'CS-101',
-              nombre: 'Introducción a la Programación',
-              estudiantes: 45,
-              evaluaciones: 38,
-              promedio: 4.8
-            },
-            {
-              id: 2,
-              codigo: 'CS-301',
-              nombre: 'Estructuras de Datos',
-              estudiantes: 32,
-              evaluaciones: 28,
-              promedio: 4.7
-            },
-            {
-              id: 3,
-              codigo: 'CS-401',
-              nombre: 'Programación Avanzada',
-              estudiantes: 28,
-              evaluaciones: 25,
-              promedio: 4.9
-            }
-          ]
-        };
-        
-        setData(mockData);
+          estadisticas: stats,
+          cursos: mappedCursos
+        });
         setError(null);
       } catch (err) {
-        setError('Error al cargar los datos');
-        console.error('Error:', err);
+        console.error('Error cargando datos del docente', err);
+        setError(err?.message || 'Error al cargar los datos');
+        setData(null);
       } finally {
         setLoading(false);
       }
     };
-
     fetchData();
-  }, []);
+  }, [perfilId, nombre, departamento]);
 
   return { data, loading, error };
 };

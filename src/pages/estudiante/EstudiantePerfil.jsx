@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { Avatar } from '@/shared/ui/components';
 import { useEstudianteData } from '@/features/evaluacion-estudiante';
+import { useState } from 'react';
 import './EstudiantePerfil.css';
 
 /**
@@ -10,6 +11,8 @@ import './EstudiantePerfil.css';
 export const EstudiantePerfil = () => {
   const { t } = useTranslation();
   const { data, loading, error } = useEstudianteData();
+  const [avatarPreview, setAvatarPreview] = useState(null);
+  const [savingAvatar, setSavingAvatar] = useState(false);
 
   if (loading) {
     return (
@@ -28,7 +31,45 @@ export const EstudiantePerfil = () => {
     );
   }
 
+  const storedUser = (() => {
+    try {
+      return JSON.parse(localStorage.getItem('user') || '{}');
+    } catch {
+      return {};
+    }
+  })();
+
   const { estudiante, cursosMatriculados } = data;
+
+  const displayEstudiante = {
+    ...estudiante,
+    nombre: storedUser.nombre || storedUser.nombreCompleto || estudiante.nombre,
+    email: storedUser.correo || storedUser.email || estudiante.email,
+    codigo: storedUser.codigoEstudiante || storedUser.codigo || estudiante.codigo || '',
+    carrera: storedUser.carrera || storedUser.facultad || estudiante.carrera || '',
+    semestre: storedUser.semestre || storedUser.semestreActual || estudiante.semestre || '',
+    avatar: avatarPreview || storedUser.avatar || estudiante.avatar
+  };
+
+  const handleAvatarChange = (e) => {
+    const file = e.target.files?.[0];
+    if (!file || !file.type.startsWith('image/')) return;
+    const reader = new FileReader();
+    setSavingAvatar(true);
+    reader.onload = () => {
+      const base64 = reader.result;
+      setAvatarPreview(base64);
+      try {
+        const user = JSON.parse(localStorage.getItem('user') || '{}');
+        user.avatar = base64;
+        localStorage.setItem('user', JSON.stringify(user));
+      } catch {
+        /* ignore */
+      }
+      setSavingAvatar(false);
+    };
+    reader.readAsDataURL(file);
+  };
 
   return (
     <div className="estudiante-perfil">
@@ -39,18 +80,22 @@ export const EstudiantePerfil = () => {
         <div className="estudiante-perfil__card">
           <div className="estudiante-perfil__avatar-section">
             <Avatar 
-              src={estudiante.avatar} 
-              alt={estudiante.nombre} 
+              src={displayEstudiante.avatar} 
+              alt={displayEstudiante.nombre} 
               size="xl" 
-              fallback="MG" 
+              fallback="U" 
             />
-            <h2 className="estudiante-perfil__name">{estudiante.nombre}</h2>
+            <h2 className="estudiante-perfil__name">{displayEstudiante.nombre}</h2>
+            <label className="estudiante-perfil__avatar-upload">
+              <input type="file" accept="image/*" onChange={handleAvatarChange} disabled={savingAvatar} />
+              {savingAvatar ? t('common.saving') : t('estudiante.profile.changeAvatar', 'Cambiar foto')}
+            </label>
           </div>
 
           <div className="estudiante-perfil__info">
             <div className="estudiante-perfil__info-item">
               <span className="estudiante-perfil__info-label">{t('estudiante.profile.email')}</span>
-              <span className="estudiante-perfil__info-value">{estudiante.email}</span>
+              <span className="estudiante-perfil__info-value">{displayEstudiante.email}</span>
             </div>
 
             <div className="estudiante-perfil__info-item">

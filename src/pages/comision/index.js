@@ -2,3 +2,8 @@ export { ComisionDashboard } from './ComisionDashboard';
 export { ComisionProfile } from './ComisionProfile';
 export { ComisionPeriodos } from './ComisionPeriodos';
 export { ComisionReportes } from './ComisionReportes';
+export { ComisionCrearPeriodo } from './ComisionCrearPeriodo';
+export { ComisionPeriodoDetalle } from './ComisionPeriodoDetalle';
+export { ComisionPeriodoEditar } from './ComisionPeriodoEditar';
+export { ComisionEvaluaciones } from './ComisionEvaluaciones';
+export { ComisionCrearEvaluacion } from './ComisionCrearEvaluacion';

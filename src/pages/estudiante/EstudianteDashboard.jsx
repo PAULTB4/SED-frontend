@@ -32,8 +32,10 @@ export const EstudianteDashboard = () => {
 
   const { estudiante, estadisticas, cursosActuales } = data;
 
-  const handleEvaluar = (cursoId) => {
-    navigate(`/estudiante/evaluar/${cursoId}`);
+  const handleEvaluar = (curso) => {
+    const targetSeccion = curso.seccionId || curso.id;
+    const query = curso.instrumentoId ? `?instrumentoId=${curso.instrumentoId}` : '';
+    navigate(`/estudiante/evaluar/${targetSeccion}${query}`);
   };
 
   return (
@@ -100,12 +102,16 @@ export const EstudianteDashboard = () => {
                 <button className="estudiante-dashboard__btn estudiante-dashboard__btn--disabled" disabled>
                   {t('estudiante.dashboard.alreadyEvaluated')}
                 </button>
-              ) : (
+              ) : curso.instrumentoId ? (
                 <button 
                   className="estudiante-dashboard__btn estudiante-dashboard__btn--primary"
-                  onClick={() => handleEvaluar(curso.id)}
+                  onClick={() => handleEvaluar(curso)}
                 >
                   {t('estudiante.dashboard.evaluate')}
+                </button>
+              ) : (
+                <button className="estudiante-dashboard__btn estudiante-dashboard__btn--disabled" disabled>
+                  {t('estudiante.dashboard.noInstrument', 'Sin evaluacion asignada')}
                 </button>
               )}
             </div>

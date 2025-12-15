@@ -1,20 +1,17 @@
-import { useState, useEffect } from 'react';
+﻿import { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation, Outlet } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Avatar, LanguageSwitcher } from '@/shared/ui/components';
 import './ComisionLayout.css';
 
 /**
- * Layout principal para las vistas de Comisión
- * Incluye navbar con navegación y dropdown de usuario
+ * Layout principal para las vistas de la Comision
  */
 export const ComisionLayout = () => {
   const { t } = useTranslation();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [darkMode, setDarkMode] = useState(() => {
-    return localStorage.getItem('darkMode') === 'true';
-  });
+  const [darkMode, setDarkMode] = useState(() => localStorage.getItem('darkMode') === 'true');
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -24,21 +21,10 @@ export const ComisionLayout = () => {
     navigate('/login');
   };
 
-  const toggleDropdown = () => {
-    setDropdownOpen(!dropdownOpen);
-  };
-
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-  };
-
-  const toggleMobileMenu = () => {
-    setMobileMenuOpen(!mobileMenuOpen);
-  };
-
-  const closeMobileMenu = () => {
-    setMobileMenuOpen(false);
-  };
+  const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
+  const toggleDarkMode = () => setDarkMode(!darkMode);
+  const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen);
+  const closeMobileMenu = () => setMobileMenuOpen(false);
 
   useEffect(() => {
     if (darkMode) {
@@ -50,10 +36,18 @@ export const ComisionLayout = () => {
     }
   }, [darkMode]);
 
+  const storedUser = (() => {
+    try {
+      return JSON.parse(localStorage.getItem('user') || '{}');
+    } catch {
+      return {};
+    }
+  })();
+
   const user = {
-    nombre: 'Admin Comisión',
-    rol: 'Comisión',
-    avatar: null
+    nombre: storedUser.nombre || storedUser.nombreCompleto || 'Usuario',
+    rol: storedUser.rol || storedUser.role || 'Comision',
+    avatar: storedUser.avatar || null
   };
 
   const navItems = [
@@ -69,7 +63,6 @@ export const ComisionLayout = () => {
     <div className="comision-layout">
       <nav className="comision-layout__navbar">
         <div className="comision-layout__navbar-container">
-          {/* Mobile Menu Button */}
           <button 
             className="comision-layout__mobile-menu-btn"
             onClick={toggleMobileMenu}
@@ -88,15 +81,8 @@ export const ComisionLayout = () => {
               viewBox="0 0 24 24" 
               fill="none"
             >
-              <path 
-                d="M12 14l9-5-9-5-9 5 9 5z" 
-                fill="currentColor"
-              />
-              <path 
-                d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" 
-                fill="currentColor"
-                opacity="0.6"
-              />
+              <path d="M12 14l9-5-9-5-9 5 9 5z" fill="currentColor" />
+              <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" fill="currentColor" opacity="0.6" />
             </svg>
             <span className="comision-layout__logo-text">SED</span>
           </Link>
@@ -110,24 +96,25 @@ export const ComisionLayout = () => {
               >
                 {item.icon === 'home' && (
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" stroke="currentColor" strokeWidth="2"/>
+                    <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" stroke="currentColor" strokeWidth="2" />
                   </svg>
                 )}
                 {item.icon === 'user' && (
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                    <circle cx="12" cy="8" r="5" stroke="currentColor" strokeWidth="2"/>
-                    <path d="M20 21a8 8 0 10-16 0" stroke="currentColor" strokeWidth="2"/>
+                    <circle cx="12" cy="8" r="5" stroke="currentColor" strokeWidth="2" />
+                    <path d="M20 21a8 8 0 10-16 0" stroke="currentColor" strokeWidth="2" />
                   </svg>
                 )}
                 {item.icon === 'calendar' && (
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" stroke="currentColor" strokeWidth="2"/>
-                    <path d="M16 2v4M8 2v4M3 10h18" stroke="currentColor" strokeWidth="2"/>
+                    <rect x="3" y="5" width="18" height="16" rx="2" stroke="currentColor" strokeWidth="2" />
+                    <path d="M16 3v4M8 3v4M3 11h18" stroke="currentColor" strokeWidth="2" />
                   </svg>
                 )}
                 {item.icon === 'chart' && (
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                    <path d="M3 3v18h18M7 16l4-4 4 4 6-6" stroke="currentColor" strokeWidth="2"/>
+                    <path d="M3 3v18h18" stroke="currentColor" strokeWidth="2" />
+                    <path d="M7 17V9M12 17V5M17 17v-6" stroke="currentColor" strokeWidth="2" />
                   </svg>
                 )}
                 <span>{item.label}</span>
@@ -142,7 +129,7 @@ export const ComisionLayout = () => {
               aria-label={t('common.darkMode')}
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" stroke="currentColor" strokeWidth="2"/>
+                <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" stroke="currentColor" strokeWidth="2" />
               </svg>
             </button>
 
@@ -150,7 +137,7 @@ export const ComisionLayout = () => {
 
             <button className="comision-layout__icon-button comision-layout__notification-button">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                <path d="M18 8A6 6 0 106 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" stroke="currentColor" strokeWidth="2"/>
+                <path d="M18 8A6 6 0 106 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" stroke="currentColor" strokeWidth="2" />
               </svg>
               <span className="comision-layout__notification-badge">2</span>
             </button>
@@ -160,10 +147,10 @@ export const ComisionLayout = () => {
                 className="comision-layout__user-button"
                 onClick={toggleDropdown}
               >
-                <Avatar src={user.avatar} alt={user.nombre} size="sm" fallback="AC" />
+                <Avatar src={user.avatar} alt={user.nombre} size="sm" fallback="U" />
                 <span className="comision-layout__user-name">{user.rol}</span>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                  <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2"/>
+                  <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2" />
                 </svg>
               </button>
 
@@ -182,8 +169,8 @@ export const ComisionLayout = () => {
                     onClick={() => setDropdownOpen(false)}
                   >
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                      <circle cx="12" cy="8" r="5" stroke="currentColor" strokeWidth="2"/>
-                      <path d="M20 21a8 8 0 10-16 0" stroke="currentColor" strokeWidth="2"/>
+                      <circle cx="12" cy="8" r="5" stroke="currentColor" strokeWidth="2" />
+                      <path d="M20 21a8 8 0 10-16 0" stroke="currentColor" strokeWidth="2" />
                     </svg>
                     {t('userMenu.profile')}
                   </Link>
@@ -192,7 +179,7 @@ export const ComisionLayout = () => {
                     onClick={handleLogout}
                   >
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                      <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9" stroke="currentColor" strokeWidth="2"/>
+                      <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9" stroke="currentColor" strokeWidth="2" />
                     </svg>
                     {t('userMenu.logout')}
                   </button>
@@ -203,21 +190,14 @@ export const ComisionLayout = () => {
         </div>
       </nav>
 
-      {/* Mobile Menu Overlay */}
-      {mobileMenuOpen && (
-        <div 
-          className="comision-layout__mobile-overlay" 
-          onClick={closeMobileMenu}
-        />
-      )}
+      {mobileMenuOpen && <div className="comision-layout__mobile-overlay" onClick={closeMobileMenu} />}
 
-      {/* Mobile Menu Sidebar */}
       <div className={`comision-layout__mobile-menu ${mobileMenuOpen ? 'comision-layout__mobile-menu--open' : ''}`}>
         <div className="comision-layout__mobile-header">
           <div className="comision-layout__mobile-logo">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
-              <path d="M12 14l9-5-9-5-9 5 9 5z" fill="currentColor"/>
-              <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" fill="currentColor" opacity="0.6"/>
+              <path d="M12 14l9-5-9-5-9 5 9 5z" fill="currentColor" />
+              <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" fill="currentColor" opacity="0.6" />
             </svg>
             <span>SED</span>
           </div>
@@ -242,25 +222,25 @@ export const ComisionLayout = () => {
             >
               {item.icon === 'home' && (
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                  <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" stroke="currentColor" strokeWidth="2"/>
+                  <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" stroke="currentColor" strokeWidth="2" />
                 </svg>
               )}
               {item.icon === 'user' && (
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                  <circle cx="12" cy="8" r="5" stroke="currentColor" strokeWidth="2"/>
-                  <path d="M20 21a8 8 0 10-16 0" stroke="currentColor" strokeWidth="2"/>
+                  <circle cx="12" cy="8" r="5" stroke="currentColor" strokeWidth="2" />
+                  <path d="M20 21a8 8 0 10-16 0" stroke="currentColor" strokeWidth="2" />
                 </svg>
               )}
               {item.icon === 'calendar' && (
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                  <rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" strokeWidth="2"/>
-                  <path d="M16 2v4M8 2v4M3 10h18" stroke="currentColor" strokeWidth="2"/>
+                  <rect x="3" y="5" width="18" height="16" rx="2" stroke="currentColor" strokeWidth="2" />
+                  <path d="M16 3v4M8 3v4M3 11h18" stroke="currentColor" strokeWidth="2" />
                 </svg>
               )}
               {item.icon === 'chart' && (
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                  <path d="M3 3v18h18" stroke="currentColor" strokeWidth="2"/>
-                  <path d="M18 17V9M13 17V5M8 17v-3" stroke="currentColor" strokeWidth="2"/>
+                  <path d="M3 3v18h18" stroke="currentColor" strokeWidth="2" />
+                  <path d="M7 17V9M12 17V5M17 17v-6" stroke="currentColor" strokeWidth="2" />
                 </svg>
               )}
               <span>{item.label}</span>
@@ -281,7 +261,7 @@ export const ComisionLayout = () => {
             onClick={handleLogout}
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-              <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9" stroke="currentColor" strokeWidth="2"/>
+              <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9" stroke="currentColor" strokeWidth="2" />
             </svg>
             {t('userMenu.logout')}
           </button>

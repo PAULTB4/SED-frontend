@@ -1,12 +1,25 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import { useComisionData } from '../../features/evaluacion-comision';
+import { periodosApi } from '@/features/evaluacion-comision/api/periodosApi';
+import { useSeccionesPeriodo } from '@/features/evaluacion-comision/hooks/useSeccionesPeriodo';
 import './ComisionPeriodos.css';
 
 export const ComisionPeriodos = () => {
   const { t } = useTranslation();
-  const { data, loading, error } = useComisionData();
+  const { data, loading, error, refetch } = useComisionData();
   const [activeTab, setActiveTab] = useState('activos');
+  const [menuOpen, setMenuOpen] = useState(null);
+  const [editingPeriodo, setEditingPeriodo] = useState(null);
+  const [nuevoNombre, setNuevoNombre] = useState('');
+  const [saving, setSaving] = useState(false);
+  const [feedback, setFeedback] = useState('');
+  const navigate = useNavigate();
+
+  const periodos = data?.periodos || [];
+  const periodoIds = useMemo(() => periodos.map((p) => p.id), [periodos]);
+  const { data: seccionesPorPeriodo } = useSeccionesPeriodo(periodoIds);
 
   if (loading) {
     return (
@@ -29,8 +42,6 @@ export const ComisionPeriodos = () => {
     );
   }
 
-  const { periodos } = data;
-
   const filterPeriodosByStatus = (status) => {
     if (status === 'activos') return periodos.filter(p => p.estado === 'activo');
     if (status === 'programados') return periodos.filter(p => p.estado === 'programado');
@@ -50,22 +61,87 @@ export const ComisionPeriodos = () => {
   };
 
   const formatDate = (dateString) => {
-    return new Date(dateString).toLocaleDateString('es-PE', { 
-      year: 'numeric', 
-      month: 'long', 
-      day: 'numeric' 
+    return new Date(dateString).toLocaleDateString('es-PE', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
     });
+  };
+
+  const toggleMenu = (id) => {
+    setMenuOpen((prev) => prev === id ? null : id);
+  };
+
+  const openEditModal = (periodo) => {
+    setEditingPeriodo(periodo);
+    setNuevoNombre(periodo?.nombre || '');
+    setFeedback('');
+    setMenuOpen(null);
+  };
+
+  const closeEditModal = () => {
+    setEditingPeriodo(null);
+    setNuevoNombre('');
+    setFeedback('');
+  };
+
+  const mapEstadoToBackend = (periodo) => {
+    if (!periodo) return 'PLANIFICADO';
+    if (periodo.estadoBackend) return periodo.estadoBackend;
+    const val = (periodo.estado || '').toString().toUpperCase();
+    if (val === 'PROGRAMADO' || val === 'PLANIFICADO') return 'PLANIFICADO';
+    if (val === 'FINALIZADO' || val === 'CERRADO') return 'CERRADO';
+    return 'ACTIVO';
+  };
+
+  const handleUpdateNombre = async (e) => {
+    e.preventDefault();
+    if (!editingPeriodo) return;
+    if (!nuevoNombre.trim()) {
+      setFeedback('Ingresa un nombre');
+      return;
+    }
+    setSaving(true);
+    setFeedback('');
+    try {
+      await periodosApi.actualizar(editingPeriodo.id, {
+        nombre: nuevoNombre.trim(),
+        fechaInicio: editingPeriodo.fechaInicio?.toString().split('T')[0],
+        fechaFin: editingPeriodo.fechaFin?.toString().split('T')[0],
+        estado: mapEstadoToBackend(editingPeriodo)
+      });
+      await refetch();
+      closeEditModal();
+    } catch (updateErr) {
+      console.error(updateErr);
+      setFeedback(updateErr?.response?.data?.message || 'No se pudo actualizar el periodo');
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const handleDeletePeriodo = async (periodoId) => {
+    if (!window.confirm('¿Eliminar este periodo? Esta acción no se puede deshacer.')) return;
+    try {
+      setSaving(true);
+      await periodosApi.eliminar(periodoId);
+      await refetch();
+    } catch (errDelete) {
+      console.error(errDelete);
+      setFeedback(errDelete?.response?.data?.message || 'No se pudo eliminar el periodo');
+    } finally {
+      setSaving(false);
+    }
   };
 
   return (
     <div className="comision-periodos">
-      {/* Header */}
       <div className="periodos-header">
         <div>
           <h1>{t('comision.periods.title')}</h1>
           <p>{t('comision.periods.subtitle')}</p>
         </div>
-        <button className="btn-create-period">
+        <button className="btn-create-period" type="button" onClick={() => navigate('/comision/periodos/crear')}>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <circle cx="12" cy="12" r="10" />
             <path d="M12 8v8M8 12h8" />
@@ -74,7 +150,6 @@ export const ComisionPeriodos = () => {
         </button>
       </div>
 
-      {/* Tabs */}
       <div className="periodos-tabs">
         <button
           className={`tab ${activeTab === 'activos' ? 'active' : ''}`}
@@ -113,7 +188,6 @@ export const ComisionPeriodos = () => {
         </button>
       </div>
 
-      {/* Períodos Grid */}
       <div className="periodos-grid">
         {filteredPeriodos.length === 0 ? (
           <div className="empty-state">
@@ -127,12 +201,37 @@ export const ComisionPeriodos = () => {
         ) : (
           filteredPeriodos.map(periodo => {
             const badge = getStatusBadge(periodo.estado);
+            const secciones = seccionesPorPeriodo[periodo.id] || [];
+            const seccionesConEval = secciones.filter((s) => s.instrumentoId);
             return (
               <div key={periodo.id} className="period-card">
                 <div className="period-card-header">
                   <h3>{periodo.nombre}</h3>
                   <span className={`status-badge ${badge.class}`}>{badge.text}</span>
                 </div>
+
+                {seccionesConEval.length > 0 && (
+                  <div className="period-eval-chip">
+                    <div>
+                      <p className="chip-title">Evaluaciones configuradas</p>
+                      <p className="chip-desc">{seccionesConEval.length} curso(s) con instrumento asignado</p>
+                    </div>
+                    <button
+                      type="button"
+                      className="btn-ghost"
+                      onClick={() => navigate(`/comision/periodos/${periodo.id}/evaluaciones`)}
+                    >
+                      Editar
+                    </button>
+                    <button
+                      type="button"
+                      className="btn-ghost danger"
+                      onClick={() => handleDeletePeriodo(periodo.id)}
+                    >
+                      Eliminar
+                    </button>
+                  </div>
+                )}
 
                 <div className="period-dates">
                   <div className="date-item">
@@ -189,15 +288,15 @@ export const ComisionPeriodos = () => {
                     <span className="progress-value">{periodo.progreso}%</span>
                   </div>
                   <div className="progress-bar">
-                    <div 
-                      className="progress-fill" 
+                    <div
+                      className="progress-fill"
                       style={{ width: `${periodo.progreso}%` }}
                     ></div>
                   </div>
                 </div>
 
                 <div className="period-actions">
-                  <button className="btn-action btn-view">
+                  <button className="btn-action btn-view" onClick={() => navigate(`/comision/periodos/${periodo.id}`)}>
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
                       <circle cx="12" cy="12" r="3" />
@@ -206,7 +305,7 @@ export const ComisionPeriodos = () => {
                   </button>
 
                   {periodo.estado !== 'finalizado' && (
-                    <button className="btn-action btn-edit">
+                    <button className="btn-action btn-edit" onClick={() => navigate(`/comision/periodos/${periodo.id}/editar`)}>
                       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                         <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
                         <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
@@ -214,20 +313,60 @@ export const ComisionPeriodos = () => {
                       <span>{t('comision.periods.edit')}</span>
                     </button>
                   )}
-
-                  <button className="btn-action btn-more">
+                  <button className="btn-action btn-edit danger" onClick={() => handleDeletePeriodo(periodo.id)}>
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <circle cx="12" cy="12" r="1" />
-                      <circle cx="12" cy="5" r="1" />
-                      <circle cx="12" cy="19" r="1" />
+                      <path d="M21 4H8l-1 14h13l1-14Z" />
+                      <path d="M10 4V2h6v2" />
+                      <path d="M14 10v6" />
+                      <path d="M10 10v6" />
                     </svg>
+                    <span>Eliminar</span>
                   </button>
+
+                  <div className="actions-wrapper">
+                    <button className="btn-action btn-more" onClick={() => toggleMenu(periodo.id)}>
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <circle cx="12" cy="12" r="1" />
+                        <circle cx="12" cy="5" r="1" />
+                        <circle cx="12" cy="19" r="1" />
+                      </svg>
+                    </button>
+                    {menuOpen === periodo.id && (
+                      <div className="period-dropdown">
+                        <button type="button" onClick={() => navigate(`/comision/periodos/${periodo.id}/evaluaciones`)}>Gestionar evaluaciones</button>
+                        <button type="button" onClick={() => openEditModal(periodo)}>Editar nombre</button>
+                        <button type="button" onClick={() => navigate(`/comision/periodos/${periodo.id}/editar`)}>Editar fechas</button>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
             );
           })
         )}
       </div>
+
+      {editingPeriodo && (
+        <div className="edit-modal">
+          <div className="edit-modal__content">
+            <h3>Renombrar periodo</h3>
+            <p>Actualiza el nombre que veran docentes y estudiantes.</p>
+            {feedback && <div className="edit-modal__error">{feedback}</div>}
+            <input
+              type="text"
+              value={nuevoNombre}
+              onChange={(e) => setNuevoNombre(e.target.value)}
+              placeholder="Nombre del periodo"
+            />
+            <div className="edit-modal__actions">
+              <button type="button" className="btn-secondary" onClick={closeEditModal}>Cancelar</button>
+              <button type="button" className="btn-primary" onClick={handleUpdateNombre} disabled={saving}>
+                {saving ? 'Guardando...' : 'Guardar'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

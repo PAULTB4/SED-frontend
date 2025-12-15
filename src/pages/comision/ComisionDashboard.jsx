@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import { useComisionData } from '../../features/evaluacion-comision';
 import { StatCard } from '../../shared/ui/components';
 import './ComisionDashboard.css';
@@ -8,6 +9,7 @@ export const ComisionDashboard = () => {
   const { t } = useTranslation();
   const { data, loading, error } = useComisionData();
   const [showBanner, setShowBanner] = useState(true);
+  const navigate = useNavigate();
 
   if (loading) {
     return (
@@ -166,7 +168,7 @@ export const ComisionDashboard = () => {
             </div>
             <h3>{t('comision.dashboard.createPeriod')}</h3>
             <p>{t('comision.dashboard.createPeriodDesc')}</p>
-            <button className="quick-btn">
+            <button className="quick-btn" type="button" onClick={() => navigate('/comision/periodos')}>
               <span>{t('comision.dashboard.createPeriod')}</span>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M5 12h14M12 5l7 7-7 7" />
@@ -183,7 +185,7 @@ export const ComisionDashboard = () => {
             </div>
             <h3>{t('comision.dashboard.viewReports')}</h3>
             <p>{t('comision.dashboard.viewReportsDesc')}</p>
-            <button className="quick-btn">
+            <button className="quick-btn" type="button" onClick={() => navigate('/comision/reportes')}>
               <span>{t('comision.dashboard.viewReports')}</span>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M5 12h14M12 5l7 7-7 7" />
@@ -200,7 +202,7 @@ export const ComisionDashboard = () => {
             </div>
             <h3>{t('comision.dashboard.manageSurveys')}</h3>
             <p>{t('comision.dashboard.manageSurveysDesc')}</p>
-            <button className="quick-btn">
+            <button className="quick-btn" type="button" onClick={() => navigate('/comision/reportes')}>
               <span>{t('comision.dashboard.manage')}</span>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M5 12h14M12 5l7 7-7 7" />

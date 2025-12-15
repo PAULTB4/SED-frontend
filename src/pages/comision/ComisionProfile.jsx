@@ -1,11 +1,21 @@
 import { useTranslation } from 'react-i18next';
 import { useComisionData } from '../../features/evaluacion-comision';
 import { Avatar, StatCard } from '../../shared/ui/components';
+import { useState } from 'react';
 import './ComisionProfile.css';
 
 export const ComisionProfile = () => {
   const { t } = useTranslation();
   const { data, loading, error } = useComisionData();
+  const [avatarPreview, setAvatarPreview] = useState(null);
+  const [savingAvatar, setSavingAvatar] = useState(false);
+  const storedUser = (() => {
+    try {
+      return JSON.parse(localStorage.getItem('user') || '{}');
+    } catch {
+      return {};
+    }
+  })();
 
   if (loading) {
     return (
@@ -30,16 +40,50 @@ export const ComisionProfile = () => {
 
   const { comision, estadisticas } = data;
 
+  const displayComision = {
+    ...comision,
+    nombre: storedUser.nombre || storedUser.nombreCompleto || comision.nombre,
+    rol: storedUser.rol || storedUser.role || comision.rol,
+    email: storedUser.correo || comision.email,
+    avatar: avatarPreview || storedUser.avatar || comision.avatar
+  };
+
+  const handleAvatarChange = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (!file.type.startsWith('image/')) return;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      const base64 = reader.result;
+      setAvatarPreview(base64);
+      try {
+        const user = JSON.parse(localStorage.getItem('user') || '{}');
+        user.avatar = base64;
+        localStorage.setItem('user', JSON.stringify(user));
+      } catch {
+        /* ignore storage errors */
+      }
+    };
+    setSavingAvatar(true);
+    reader.onloadend = () => setSavingAvatar(false);
+    reader.readAsDataURL(file);
+  };
+
   return (
     <div className="comision-profile">
       {/* Header del perfil */}
       <div className="profile-header">
         <div className="profile-card">
-          <Avatar src={comision.avatar} alt={comision.nombre} size="xl" fallback="MG" />
+          <Avatar src={displayComision.avatar} alt={displayComision.nombre} size="xl" fallback="U" />
           <div className="profile-info">
-            <h1>{comision.nombre}</h1>
-            <p className="profile-rol">{comision.rol}</p>
-            <p className="profile-cargo">{comision.cargo}</p>
+            <h1>{displayComision.nombre}</h1>
+            <p className="profile-rol">{displayComision.rol}</p>
+            <p className="profile-cargo">{displayComision.cargo}</p>
+            <label className="avatar-upload">
+              <input type="file" accept="image/*" onChange={handleAvatarChange} disabled={savingAvatar} />
+              {savingAvatar ? t('common.saving') : t('comision.profile.changeAvatar')}
+            </label>
           </div>
         </div>
       </div>
@@ -57,7 +101,7 @@ export const ComisionProfile = () => {
             </div>
             <div className="info-content">
               <label>{t('comision.profile.email')}</label>
-              <p>{comision.email}</p>
+              <p>{displayComision.email}</p>
             </div>
           </div>
 
